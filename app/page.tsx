@@ -13,8 +13,8 @@ export default function Home() {
           height={38}
           priority
         />
-        <p className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          ¡Bienvenido/a!
+        <p className="list-inside list-decimal text-sm text-center sm:text-left">
+          ¡Bienvenido/a! 😊
         </p>
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <Link
@@ -37,14 +37,14 @@ export default function Home() {
       </main>
       <footer className="row-start-3 flex gap-1 flex-wrap items-center justify-center">
         <span>&copy; 2025. Desarrollado por</span>
-        <Link
+        <a
           className="flex items-center underline underline-offset-4"
           href="https://eiper.cl"
           target="_blank"
           rel="noopener noreferrer"
         >
           Nombre de la empresa
-        </Link>
+        </a>
       </footer>
     </div>
   );
