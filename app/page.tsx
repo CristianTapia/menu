@@ -13,7 +13,7 @@ export default function Home() {
           height={38}
           priority
         />
-        <p className="list-inside list-decimal text-sm text-center sm:text-left">
+        <p className="list-inside list-decimal text-base text-center sm:text-left">
           ¡Bienvenido/a! 😊
         </p>
         <div className="flex gap-4 items-center flex-col sm:flex-row">
@@ -35,7 +35,7 @@ export default function Home() {
           </Link>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-1 flex-wrap items-center justify-center">
+      <footer className="row-start-3 flex gap-1 flex-wrap items-center justify-center text-sm">
         <span>&copy; 2025. Desarrollado por</span>
         <a
           className="flex items-center underline underline-offset-4"
