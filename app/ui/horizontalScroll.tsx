@@ -12,7 +12,6 @@ export default function HorizontalScroll() {
   ];
 
   return (
-    // <div className="h-screen flex flex-col items-center p-6">
     <div className="w-full max-w-4xl overflow-x-auto whitespace-nowrap border rounded-lg p-4 scrollbar-hide">
       <div className="flex space-x-4">
         {optionsArray.map((options) => (
@@ -25,6 +24,5 @@ export default function HorizontalScroll() {
         ))}
       </div>
     </div>
-    // </div>
   );
 }
