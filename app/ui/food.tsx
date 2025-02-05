@@ -10,9 +10,17 @@ export default function Food() {
   ];
 
   return (
-    <div className="mt-4 bg-blue-500 text-white text-center grid grid-cols-2">
-      <div className="p-5">Lado A</div>
-      <div className="p-5">Lado B</div>
+    <div>
+      {foodArray.map((option, index) => (
+        <div
+          key={index}
+          className="mt-4 bg-blue-500 text-white text-center grid grid-cols-2"
+        >
+          <div className="p-5">{option}</div>
+          <div className="p-5">Lado A</div>
+          <div className="p-5">Lado B</div>
+        </div>
+      ))}
     </div>
   );
 }
