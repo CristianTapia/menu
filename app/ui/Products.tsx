@@ -16,11 +16,11 @@ export default function Products() {
   ];
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-4">
       {foodArray.map((option) => (
         <div
           key={option.id}
-          className="mt-4 bg-blue-500 text-white text-center grid grid-cols-2"
+          className="bg-blue-500 text-white text-center grid grid-cols-2"
         >
           <div className="p-5">{option.name}</div>
           <div className="p-5">{option.price}</div>

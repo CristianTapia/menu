@@ -7,15 +7,15 @@ export default function Menu() {
       <div className="overflow-x-auto scrollbar-hide text-center bg-red-600">
         <Categories />
       </div>
-      <div className="bg-gray-200 p-4 overflow-y-auto">
+      <div className="p-4 overflow-y-auto h-full">
         <Products />
       </div>
-      <div className="bg-red-700 text-center grid grid-cols-4 w-full items-center">
+      <footer className="bg-red-700 text-center grid grid-cols-4 w-full items-center">
         <div>Menú</div>
         <div>Atención</div>
         <div>Cuenta</div>
         <div>AI</div>
-      </div>
+      </footer>
     </div>
   );
 }
