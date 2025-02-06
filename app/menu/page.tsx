@@ -3,15 +3,19 @@ import Products from "../ui/Products";
 
 export default function Menu() {
   return (
-    <div className="flex-col justify-center items-center h-screen">
-      <Categories />
-      <Products />
-      <footer className="bg-red-700 text-center grid grid-cols-4 py-4 bottom-0 fixed w-full">
+    <div className="grid grid-rows-[10%,80%,10%] h-screen">
+      <div className="overflow-x-auto scrollbar-hide text-center bg-red-600">
+        <Categories />
+      </div>
+      <div className="bg-gray-200 p-4 overflow-y-auto">
+        <Products />
+      </div>
+      <div className="bg-red-700 text-center grid grid-cols-4 w-full items-center">
         <div>Menú</div>
         <div>Atención</div>
         <div>Cuenta</div>
         <div>AI</div>
-      </footer>
+      </div>
     </div>
   );
 }

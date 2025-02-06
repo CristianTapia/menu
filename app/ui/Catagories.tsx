@@ -12,14 +12,15 @@ export default function Categories() {
   ];
 
   return (
-    <div className="overflow-x-auto scrollbar-hide text-center bg-red-600">
-      <div className="flex gap-4">
-        {optionsArray.map((option) => (
-          <div key={option.id} className="h-20 flex items-center">
-            {option.name}
-          </div>
-        ))}
-      </div>
+    <div className="flex gap-4 h-full">
+      {optionsArray.map((option) => (
+        <div
+          key={option.id}
+          className="justify-center flex items-center h-full"
+        >
+          {option.name}
+        </div>
+      ))}
     </div>
   );
 }

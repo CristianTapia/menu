@@ -12,6 +12,7 @@ export default function Products() {
     { id: "a8", name: "Atún", price: "6.000" },
     { id: "a9", name: "Atún", price: "6.000" },
     { id: "a10", name: "Atún", price: "6.000" },
+    { id: "a11", name: "Final", price: "6.000" },
   ];
 
   return (
