@@ -1,6 +1,6 @@
 import Categories from "../ui/Catagories";
-import OffCanvas from "../ui/OffCanvas";
 import Products from "../ui/Products";
+import AddToCart from "../ui/AddToCart";
 
 export default function Menu() {
   return (
@@ -16,7 +16,7 @@ export default function Menu() {
         <div>Atención</div>
         <div>Cuenta</div>
         <div>
-          <OffCanvas />
+          <AddToCart />
         </div>
       </footer>
     </div>
