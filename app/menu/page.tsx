@@ -1,6 +1,6 @@
 import Categories from "../ui/Catagories";
+import OffCanvas from "../ui/OffCanvas";
 import Products from "../ui/Products";
-import ShoppingCart from "../ui/ShoppingCart";
 
 export default function Menu() {
   return (
@@ -16,10 +16,7 @@ export default function Menu() {
         <div>Atención</div>
         <div>Cuenta</div>
         <div>
-          <div className="flex flex-col items-center justify-center min-h-screen p-6">
-            <h1 className="text-2xl font-bold mb-4">Tienda Online</h1>
-            <ShoppingCart /> {/* Usa el carrito aquí */}
-          </div>
+          <OffCanvas />
         </div>
       </footer>
     </div>
