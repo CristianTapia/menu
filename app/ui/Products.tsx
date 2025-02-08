@@ -35,14 +35,18 @@ export default function Products() {
         >
           <div className="p-5">{option.name}</div>
 
-          <div className="p-5">
-            <p>{option.price}</p>
-            <button
-              className="bg-yellow-400 text-black"
-              onClick={() => addProduct(option.id)}
-            >
-              + {add[option.id] || 0}
-            </button>
+          <div className="p-5 grid grid-rows-2">
+            <div>{option.price}</div>
+            <div>
+              <button className="bg-yellow-400 text-black p-1">-</button>
+              <span className="p-4">{add[option.id] || 0}</span>
+              <button
+                className="bg-yellow-400 text-black p-1"
+                onClick={() => addProduct(option.id)}
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
       ))}
