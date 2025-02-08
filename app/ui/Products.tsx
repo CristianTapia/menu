@@ -35,13 +35,13 @@ export default function Products() {
         >
           <div className="p-5">{option.name}</div>
 
-          <div className="p-5 grid grid-rows-2">
+          <div className="p-5 grid grid-rows-2 items-center">
             <div>{option.price}</div>
-            <div>
-              <button className="bg-yellow-400 text-black p-1">-</button>
-              <span className="p-4">{add[option.id] || 0}</span>
+            <div className="flex items-center justify-center gap-2">
+              <button className="bg-yellow-400 text-black p-2">-</button>
+              <span className="p-2 border">{add[option.id] || 0}</span>
               <button
-                className="bg-yellow-400 text-black p-1"
+                className="bg-yellow-400 text-black p-2"
                 onClick={() => addProduct(option.id)}
               >
                 +
