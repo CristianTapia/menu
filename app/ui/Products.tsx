@@ -26,6 +26,13 @@ export default function Products() {
     }));
   }
 
+  function removeProduct(id: string) {
+    setAdd((prevAdd) => ({
+      ...prevAdd,
+      [id]: Math.max((prevAdd[id] || 0) - 1, 0),
+    }));
+  }
+
   return (
     <div className="flex flex-col gap-y-4">
       {productArray.map((option) => (
@@ -38,7 +45,12 @@ export default function Products() {
           <div className="p-5 grid grid-rows-2 items-center">
             <div>{option.price}</div>
             <div className="flex items-center justify-center gap-2">
-              <button className="bg-yellow-400 text-black p-2">-</button>
+              <button
+                className="bg-yellow-400 text-black p-2"
+                onClick={() => removeProduct(option.id)}
+              >
+                -
+              </button>
               <span className="p-2 border">{add[option.id] || 0}</span>
               <button
                 className="bg-yellow-400 text-black p-2"
