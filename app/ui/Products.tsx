@@ -19,6 +19,7 @@ export default function Products() {
 
   const [add, setAdd] = useState<Record<string, number>>({});
 
+  // Adding and removing the same product in each card
   function addProduct(id: string) {
     setAdd((prevAdd) => ({
       ...prevAdd,
@@ -33,6 +34,7 @@ export default function Products() {
     }));
   }
 
+  // Showing the card
   return (
     <div className="flex flex-col gap-y-4">
       {productArray.map((option) => (
@@ -43,7 +45,7 @@ export default function Products() {
           <div className="p-5">{option.name}</div>
 
           <div className="p-5 grid grid-rows-2 items-center">
-            <div>{option.price}</div>
+            <div>${option.price}</div>
             <div className="flex items-center justify-center gap-2">
               <button
                 className="bg-yellow-400 text-black p-2"
@@ -58,6 +60,7 @@ export default function Products() {
               >
                 +
               </button>
+              <button className="bg-green-400 text-black p-2">Order</button>
             </div>
           </div>
         </div>
