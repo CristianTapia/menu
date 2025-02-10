@@ -1,6 +1,6 @@
 import Categories from "../ui/Catagories";
 import Products from "../ui/Products";
-import AddToCart from "../ui/AddToCart";
+import Cart from "../ui/Cart";
 
 export default function Menu() {
   return (
@@ -16,7 +16,7 @@ export default function Menu() {
         <div>Atención</div>
         <div>Cuenta</div>
         <div>
-          <AddToCart />
+          <Cart />
         </div>
       </footer>
     </div>
