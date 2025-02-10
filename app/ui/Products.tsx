@@ -17,20 +17,20 @@ export default function Products() {
     { id: "a11", name: "Final", price: "6.000" },
   ];
 
-  const [add, setAdd] = useState<Record<string, number>>({});
+  const [plus, setPlus] = useState<Record<string, number>>({});
 
-  // Adding and removing the same product in each card
-  function addProduct(id: string) {
-    setAdd((prevAdd) => ({
-      ...prevAdd,
-      [id]: (prevAdd[id] || 0) + 1,
+  // Additioning and subtracting the same product in each card
+  function plusProd(id: string) {
+    setPlus((prevPlus) => ({
+      ...prevPlus,
+      [id]: (prevPlus[id] || 0) + 1,
     }));
   }
 
-  function removeProduct(id: string) {
-    setAdd((prevAdd) => ({
-      ...prevAdd,
-      [id]: Math.max((prevAdd[id] || 0) - 1, 0),
+  function minusProd(id: string) {
+    setPlus((prevPlus) => ({
+      ...prevPlus,
+      [id]: Math.max((prevPlus[id] || 0) - 1, 0),
     }));
   }
 
@@ -49,14 +49,14 @@ export default function Products() {
             <div className="flex items-center justify-center gap-2">
               <button
                 className="bg-yellow-400 text-black p-2"
-                onClick={() => removeProduct(option.id)}
+                onClick={() => minusProd(option.id)}
               >
                 -
               </button>
-              <span className="p-2 border">{add[option.id] || 0}</span>
+              <span className="p-2 border">{plus[option.id] || 0}</span>
               <button
                 className="bg-yellow-400 text-black p-2"
-                onClick={() => addProduct(option.id)}
+                onClick={() => plusProd(option.id)}
               >
                 +
               </button>

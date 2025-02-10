@@ -3,6 +3,8 @@ import Products from "../ui/Products";
 import Cart from "../ui/Cart";
 
 export default function Menu() {
+  // const [add]
+
   return (
     <div className="grid grid-rows-[10%,80%,10%] h-screen">
       <div className="p-4 overflow-x-auto scrollbar-hide text-center bg-red-600">
