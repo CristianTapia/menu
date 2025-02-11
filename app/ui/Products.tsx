@@ -1,22 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { productArray } from "../lib/data";
 
-export default function Products() {
-  const productArray = [
-    { id: "a1", name: "Papas", price: "5.000" },
-    { id: "a2", name: "Lomo saltado", price: "10.000" },
-    { id: "a3", name: "Chorrillana", price: "8.000" },
-    { id: "a4", name: "Salmón", price: "12.000" },
-    { id: "a5", name: "Atún", price: "6.000" },
-    { id: "a6", name: "Atún", price: "6.000" },
-    { id: "a7", name: "Atún", price: "6.000" },
-    { id: "a8", name: "Atún", price: "6.000" },
-    { id: "a9", name: "Atún", price: "6.000" },
-    { id: "a10", name: "Atún", price: "6.000" },
-    { id: "a11", name: "Final", price: "6.000" },
-  ];
+type ProductsProps = {
+  onOrderClick: (productName: string, quantity: number) => void;
+};
 
+export default function Products({ onOrderClick }: ProductsProps) {
   const [plus, setPlus] = useState<Record<string, number>>({});
 
   // Additioning and subtracting the same product in each card
@@ -60,7 +51,16 @@ export default function Products() {
               >
                 +
               </button>
-              <button className="bg-green-400 text-black p-2">Order</button>
+              <button
+                className="bg-green-400 text-black p-2"
+                onClick={() => {
+                  if ((plus[option.id] || 0) > 0) {
+                    onOrderClick(option.name, plus[option.id] || 0);
+                  }
+                }}
+              >
+                Order
+              </button>
             </div>
           </div>
         </div>

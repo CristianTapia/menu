@@ -32,23 +32,7 @@ export default function OffCanvas({
             ✕
           </button>
         </div>
-        <ul className="p-4 space-y-2">
-          <li>
-            <a href="#" className="block p-2 hover:bg-gray-100">
-              Opción 1
-            </a>
-          </li>
-          <li>
-            <a href="#" className="block p-2 hover:bg-gray-100">
-              Opción 2
-            </a>
-          </li>
-          <li>
-            <a href="#" className="block p-2 hover:bg-gray-100">
-              Opción 3
-            </a>
-          </li>
-        </ul>
+        <div></div>
       </div>
     </>
   );
