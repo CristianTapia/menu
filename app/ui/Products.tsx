@@ -3,11 +3,15 @@
 import { useState } from "react";
 import { productArray } from "../lib/data";
 
-type ProductsProps = {
-  onOrderClick: (productName: string, quantity: number) => void;
-};
-
-export default function Products({ onOrderClick }: ProductsProps) {
+export default function Products({
+  onOrderClick,
+}: {
+  onOrderClick: (
+    productName: string,
+    productPrice: number,
+    productQuantity: number
+  ) => void;
+}) {
   const [plus, setPlus] = useState<Record<string, number>>({});
 
   // Additioning and subtracting the same product in each card
@@ -55,11 +59,11 @@ export default function Products({ onOrderClick }: ProductsProps) {
                 className="bg-green-400 text-black p-2"
                 onClick={() => {
                   if ((plus[option.id] || 0) > 0) {
-                    onOrderClick(option.name, plus[option.id] || 0);
+                    onOrderClick(option.name, option.price, plus[option.id]);
                   }
                 }}
               >
-                Order
+                Enviar
               </button>
             </div>
           </div>

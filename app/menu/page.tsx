@@ -8,13 +8,17 @@ import Cart from "../ui/Cart";
 
 export default function Menu() {
   const [selectedProducts, setSelectedProducts] = useState<
-    { name: string; quantity: number }[]
+    { name: string; price: number; quantity: number }[]
   >([]);
 
-  function addProdToCart(productName: string, quantity: number) {
+  function addProdToCart(
+    productName: string,
+    productPrice: number,
+    productQuantity: number
+  ) {
     return setSelectedProducts((prev) => [
       ...prev,
-      { name: productName, quantity },
+      { name: productName, price: productPrice, quantity: productQuantity },
     ]);
   }
 
@@ -30,7 +34,7 @@ export default function Menu() {
           <div>
             {selectedProducts.map((product, index) => (
               <p key={index}>
-                {product.name} (x{product.quantity})
+                {product.name} (x{product.price})
               </p>
             ))}
           </div>
