@@ -51,7 +51,9 @@ export default function Products({
               <span className="p-2 border">{plus[option.id] || 0}</span>
               <button
                 className="bg-yellow-400 text-black p-2"
-                onClick={() => plusProd(option.id)}
+                onClick={() => {
+                  plusProd(option.id);
+                }}
               >
                 +
               </button>

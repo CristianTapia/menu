@@ -34,7 +34,8 @@ export default function Menu() {
           <div>
             {selectedProducts.map((product, index) => (
               <p key={index}>
-                {product.name} (x{product.price})
+                Nombre: {product.name} Precio: {product.price} Cantidad:{" "}
+                {product.quantity} Total: {product.price * product.quantity}
               </p>
             ))}
           </div>
