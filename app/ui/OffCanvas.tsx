@@ -1,6 +1,14 @@
 "use client";
 
-export default function OffCanvas({ isOpen, onCloseAction }: { isOpen: boolean; onCloseAction: () => void }) {
+export default function OffCanvas({
+  isOpen,
+  onCloseAction,
+  children,
+}: {
+  isOpen: boolean;
+  onCloseAction: () => void;
+  children: React.ReactNode; // Acepta contenido dinámico (productos seleccionados)
+}) {
   return (
     <>
       {/* Overlay - Cierra el menú si se hace clic afuera */}
@@ -18,7 +26,10 @@ export default function OffCanvas({ isOpen, onCloseAction }: { isOpen: boolean; 
             ✕
           </button>
         </div>
-        <div></div>
+        <div className="p-4">
+          {/* Aquí se renderiza el contenido dinámico */}
+          {children}
+        </div>
       </div>
     </>
   );
