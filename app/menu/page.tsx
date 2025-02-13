@@ -16,10 +16,23 @@ export default function Menu() {
     productPrice: number,
     productQuantity: number
   ) {
-    return setSelectedProducts((prev) => [
-      ...prev,
-      { name: productName, price: productPrice, quantity: productQuantity },
-    ]);
+    setSelectedProducts((prev) => {
+      const exists = prev.find((p) => p.name === productName);
+      return exists
+        ? prev.map((p) =>
+            p.name === productName
+              ? { ...p, quantity: p.quantity + productQuantity }
+              : p
+          )
+        : [
+            ...prev,
+            {
+              name: productName,
+              price: productPrice,
+              quantity: productQuantity,
+            },
+          ];
+    });
   }
 
   return (
