@@ -1,21 +1,10 @@
 "use client";
 
-export default function OffCanvas({
-  isOpen,
-  onClose,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-}) {
+export default function OffCanvas({ isOpen, onCloseAction }: { isOpen: boolean; onCloseAction: () => void }) {
   return (
     <>
       {/* Overlay - Cierra el menú si se hace clic afuera */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-          onClick={onClose}
-        />
-      )}
+      {isOpen && <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={onCloseAction} />}
 
       {/* Menú Off-Canvas */}
       <div
@@ -25,10 +14,7 @@ export default function OffCanvas({
       >
         <div className="p-4 flex justify-between items-center border-b">
           <h2 className="text-lg font-semibold">Menú</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-600 hover:text-gray-900"
-          >
+          <button onClick={onCloseAction} className="text-gray-600 hover:text-gray-900">
             ✕
           </button>
         </div>

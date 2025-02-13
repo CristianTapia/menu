@@ -4,13 +4,9 @@ import { useState } from "react";
 import { productArray } from "../lib/data";
 
 export default function Products({
-  onOrderClick,
+  onOrderClickAction,
 }: {
-  onOrderClick: (
-    productName: string,
-    productPrice: number,
-    productQuantity: number
-  ) => void;
+  onOrderClickAction: (productName: string, productPrice: number, productQuantity: number) => void;
 }) {
   const [plus, setPlus] = useState<Record<string, number>>({});
 
@@ -33,19 +29,13 @@ export default function Products({
   return (
     <div className="flex flex-col gap-y-4">
       {productArray.map((option) => (
-        <div
-          key={option.id}
-          className="bg-blue-500 text-white text-center grid grid-cols-2"
-        >
+        <div key={option.id} className="bg-blue-500 text-white text-center grid grid-cols-2">
           <div className="p-5">{option.name}</div>
 
           <div className="p-5 grid grid-rows-2 items-center">
             <div>${option.price}</div>
             <div className="flex items-center justify-center gap-2">
-              <button
-                className="bg-yellow-400 text-black p-2"
-                onClick={() => minusProd(option.id)}
-              >
+              <button className="bg-yellow-400 text-black p-2" onClick={() => minusProd(option.id)}>
                 -
               </button>
               <span className="p-2 border">{plus[option.id] || 0}</span>
@@ -61,7 +51,7 @@ export default function Products({
                 className="bg-green-400 text-black p-2"
                 onClick={() => {
                   if ((plus[option.id] || 0) > 0) {
-                    onOrderClick(option.name, option.price, plus[option.id]);
+                    onOrderClickAction(option.name, option.price, plus[option.id]);
                   }
                 }}
               >

@@ -7,23 +7,13 @@ import Products from "../ui/Products";
 import Cart from "../ui/Cart";
 
 export default function Menu() {
-  const [selectedProducts, setSelectedProducts] = useState<
-    { name: string; price: number; quantity: number }[]
-  >([]);
+  const [selectedProducts, setSelectedProducts] = useState<{ name: string; price: number; quantity: number }[]>([]);
 
-  function addProdToCart(
-    productName: string,
-    productPrice: number,
-    productQuantity: number
-  ) {
+  function addProdToCart(productName: string, productPrice: number, productQuantity: number) {
     setSelectedProducts((prev) => {
       const exists = prev.find((p) => p.name === productName);
       return exists
-        ? prev.map((p) =>
-            p.name === productName
-              ? { ...p, quantity: p.quantity + productQuantity }
-              : p
-          )
+        ? prev.map((p) => (p.name === productName ? { ...p, quantity: p.quantity + productQuantity } : p))
         : [
             ...prev,
             {
@@ -41,14 +31,14 @@ export default function Menu() {
         <Categories />
       </div>
       <div className="p-4 overflow-y-auto">
-        <Products onOrderClick={addProdToCart} />
+        <Products onOrderClickAction={addProdToCart} />
         <div>
           <h2>Productos Seleccionados:</h2>
           <div className="flex flex-col gap-4">
             {selectedProducts.map((product, index) => (
               <div className="p-4 bg-orange-600 gap-4" key={index}>
-                Nombre: {product.name} Precio: {product.price} Cantidad:{" "}
-                {product.quantity} Total: {product.price * product.quantity}
+                Nombre: {product.name} Precio: {product.price} Cantidad: {product.quantity} Total:{" "}
+                {product.price * product.quantity}
               </div>
             ))}
           </div>

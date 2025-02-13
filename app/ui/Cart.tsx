@@ -8,15 +8,12 @@ export default function Cart() {
   return (
     <div>
       <div>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
-        >
+        <button onClick={() => setIsOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded-md">
           Abrir Menú
         </button>
 
         {/* Off-Canvas Importado */}
-        <OffCanvas isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        <OffCanvas isOpen={isOpen} onCloseAction={() => setIsOpen(false)} />
       </div>
     </div>
   );
