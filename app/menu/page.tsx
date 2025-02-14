@@ -39,7 +39,7 @@ export default function Menu() {
       </div>
 
       <footer className="bg-red-700 text-center grid grid-cols-4 w-full items-center">
-        <div>Menú</div>
+        <div>IA</div>
         <div>Atención</div>
         <div>Cuenta</div>
         <div>
@@ -51,7 +51,6 @@ export default function Menu() {
 
       {/* OffCanvas con los productos seleccionados */}
       <OffCanvas isOpen={isOffCanvasOpen} onCloseAction={toggleOffCanvas}>
-        <h2>Productos Seleccionados:</h2>
         <div className="flex flex-col gap-4">
           {selectedProducts.map((product, index) => (
             <div className="p-4 bg-orange-600 gap-4" key={index}>

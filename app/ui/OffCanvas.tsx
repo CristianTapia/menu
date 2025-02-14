@@ -18,18 +18,18 @@ export default function OffCanvas({
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300`}
+        } transition-transform duration-300 flex flex-col`}
       >
+        {/* Cabecera fija */}
         <div className="p-4 flex justify-between items-center border-b">
-          <h2 className="text-lg font-semibold">Menú</h2>
-          <button onClick={onCloseAction} className="text-gray-600 hover:text-gray-900">
+          <h2 className="text-red-600 text-lg font-semibold">Comanda</h2>
+          <button onClick={onCloseAction} className="text-red-600">
             ✕
           </button>
         </div>
-        <div className="p-4">
-          {/* Aquí se renderiza el contenido dinámico */}
-          {children}
-        </div>
+
+        {/* Contenedor con scroll */}
+        <div className="flex-1 overflow-y-auto p-4">{children}</div>
       </div>
     </>
   );
