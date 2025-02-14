@@ -21,7 +21,7 @@ export default function OffCanvas({
         } transition-transform duration-300 flex flex-col`}
       >
         {/* Cabecera fija */}
-        <div className="p-4 flex justify-between items-center border-b">
+        <div className="p-4 flex justify-between border-b">
           <h2 className="text-red-600 text-lg font-semibold">Comanda</h2>
           <button onClick={onCloseAction} className="text-red-600">
             ✕
@@ -30,6 +30,10 @@ export default function OffCanvas({
 
         {/* Contenedor con scroll */}
         <div className="flex-1 overflow-y-auto p-4">{children}</div>
+        <div className="flex p-4 items-center justify-center">
+          <div className="text-red-800">Total: valores totales</div>
+          <button className="bg-black p-4 ml-auto">Pedir</button>
+        </div>
       </div>
     </>
   );
