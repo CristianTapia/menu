@@ -54,7 +54,7 @@ export default function Menu() {
         <div className="flex flex-col gap-4">
           {selectedProducts.map((product, index) => (
             <div className="p-4 bg-orange-600 gap-4" key={index}>
-              {product.name} ${product.price} Cantidad: {product.quantity} Total: {product.price * product.quantity}
+              {product.name} ${product.price} Cantidad: {product.quantity} Total: ${product.price * product.quantity}
             </div>
           ))}
         </div>
