@@ -30,6 +30,8 @@ export default function OffCanvas({
 
         {/* Contenedor con scroll */}
         <div className="flex-1 overflow-y-auto p-2">{children}</div>
+
+        {/* Footer para ordenar */}
         <div className="flex p-4 items-center justify-center">
           <div className="text-red-800">Total: falta sumar</div>
           <button className="bg-black p-4 ml-auto">Pedir</button>
