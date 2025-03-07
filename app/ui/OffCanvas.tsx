@@ -35,7 +35,7 @@ export default function OffCanvas({
 
         {/* Footer para ordenar */}
         <div className="flex p-4 items-center justify-center">
-          <div className="text-red-800">Total: {sum}</div>
+          <div className="text-red-800">Total: </div>
           <button className="bg-black p-4 ml-auto">Pedir</button>
         </div>
       </div>
