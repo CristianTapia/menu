@@ -29,6 +29,8 @@ export default function Menu() {
     });
   }
 
+  // Math to do the totals here
+
   function toggleOffCanvas() {
     setOffCanvasOpen((prev) => !prev);
   }
