@@ -9,15 +9,12 @@ export default function Menu() {
   const [selectedProducts, setSelectedProducts] = useState<{ name: string; price: number; quantity: number }[]>([]);
   const [isOffCanvasOpen, setOffCanvasOpen] = useState(false); // Estado para abrir/cerrar el offcanvas
 
-  const [sum, setSum] = useState<number>(0);
-
-  function totalValueSum() {
-    return sum;
-  }
+  const grandTotalValue = selectedProducts.reduce((sum, product) => sum + product.price * product.quantity, 0);
 
   function addProdToCart(productName: string, productPrice: number, productQuantity: number) {
     setSelectedProducts((prev) => {
       const exists = prev.find((p) => p.name === productName);
+
       return exists
         ? prev.map((p) => (p.name === productName ? { ...p, quantity: p.quantity + productQuantity } : p))
         : [
@@ -56,7 +53,7 @@ export default function Menu() {
       </footer>
 
       {/* OffCanvas con los productos seleccionados */}
-      <OffCanvas sum={totalValueSum()} isOpen={isOffCanvasOpen} onCloseAction={toggleOffCanvas}>
+      <OffCanvas grandTotal={grandTotalValue} isOpen={isOffCanvasOpen} onCloseAction={toggleOffCanvas}>
         <div className="flex flex-col gap-4">
           {selectedProducts.map((product, index) => (
             <div className="p-4 bg-orange-600 gap-4" key={index}>

@@ -12,6 +12,7 @@ export default function Products({
 
   // Additioning and subtracting the same product in each card
   function plusProd(id: string) {
+    console.log(setPlus);
     setPlus((prevPlus) => ({
       ...prevPlus,
       [id]: (prevPlus[id] || 0) + 1,
