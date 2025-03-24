@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Categories from "../ui/Catagories";
 import Products from "../ui/Products";
-import OffCanvas from "../ui/OffCanvas"; // Importa el componente OffCanvas
+import OffCanvas from "../ui/OffCanvas";
 
 export default function Menu() {
   const [selectedProducts, setSelectedProducts] = useState<{ name: string; price: number; quantity: number }[]>([]);
@@ -15,6 +15,7 @@ export default function Menu() {
 
   // AGREGAR PRODUCTOS AL OFFCANVAS
   function addProdToCart(productName: string, productPrice: number, productQuantity: number, productCategory: string) {
+
     setSelectedProducts((prev) => {
       const exists = prev.find((p) => p.name === productName);
 
