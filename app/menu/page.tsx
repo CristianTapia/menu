@@ -8,11 +8,12 @@ import OffCanvas from "../ui/OffCanvas"; // Importa el componente OffCanvas
 export default function Menu() {
   const [selectedProducts, setSelectedProducts] = useState<{ name: string; price: number; quantity: number }[]>([]);
   const [isOffCanvasOpen, setOffCanvasOpen] = useState(false); // Estado para abrir/cerrar el offcanvas
-
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  // SUMA PRECIO DE TODOS LOS PRODUCTOS SELECCIONADOS
   const grandTotalValue = selectedProducts.reduce((sum, product) => sum + product.price * product.quantity, 0);
 
+  // AGREGAR PRODUCTOS AL OFFCANVAS
   function addProdToCart(productName: string, productPrice: number, productQuantity: number, productCategory: string) {
     setSelectedProducts((prev) => {
       const exists = prev.find((p) => p.name === productName);
@@ -31,14 +32,16 @@ export default function Menu() {
     });
   }
 
+  // ABRIR/CERRAR OFFCANVAS
   function toggleOffCanvas() {
     setOffCanvasOpen((prev) => !prev);
   }
 
   return (
     <div className="grid grid-rows-[10%,80%,10%] h-screen">
+      {/* Categorías con filtro */}
       <div className="p-4 overflow-x-auto scrollbar-hide text-center bg-red-600">
-        <Categories onCategorySelect={setSelectedCategory} />
+        <Categories onCategorySelectionAction={setSelectedCategory} />
       </div>
       <div className="p-4 overflow-y-auto">
         <Products onOrderClickAction={addProdToCart} selectedCategory={selectedCategory} />
