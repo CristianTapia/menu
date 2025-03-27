@@ -17,7 +17,7 @@ export default function Categories({
   return (
     <div className="grid grid-cols-[auto_1fr] items-center w-full overflow-x-auto">
       {/* 🔹 Botón "Todas" fijo */}
-      <div className="sticky left-0 z-10">
+      <div className="sticky left-0">
         <button
           onClick={() => handleCategoryClick(null)}
           className={`px-4 py-2 rounded ${
