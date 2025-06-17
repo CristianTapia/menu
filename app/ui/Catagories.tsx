@@ -29,7 +29,7 @@ export default function Categories({
       </div>
 
       {/* 🔹 Botones desplazables */}
-      <div className="overflow-x-auto flex gap-4 pl-2">
+      <div className="overflow-x-auto flex gap-4 pl-4">
         {categoriesArray.map((option) => (
           <button
             key={option.id}

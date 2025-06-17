@@ -41,7 +41,7 @@ export default function Menu() {
 
   return (
     <div className="grid grid-rows-[10%,80%,10%] h-screen">
-      <div className="p-4 overflow-x-auto scrollbar-hide text-center bg-red-600">
+      <div className="p-4 overflow-x-auto scrollbar-hide text-center bg-white-200 grid place-items-center">
         <Categories onCategorySelectionAction={setSelectedCategory} />
       </div>
       <div className="p-4 overflow-y-auto">
