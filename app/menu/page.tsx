@@ -41,7 +41,7 @@ export default function Menu() {
 
   return (
     <div className="grid grid-rows-[10%,80%,10%] h-screen">
-      <div className="p-4 overflow-x-auto scrollbar-hide text-center bg-white-200 grid place-items-center">
+      <div className="p-4 overflow-x-auto scrollbar-hide text-center grid place-items-center">
         <Categories onCategorySelectionAction={setSelectedCategory} />
       </div>
       <div className="p-4 overflow-y-auto">
@@ -52,11 +52,7 @@ export default function Menu() {
         <div>IA</div>
         <div>Atención</div>
         <div>Cuenta</div>
-        <div>
-          <button onClick={toggleOffCanvas} className="mt-4 p-2 bg-blue-500 text-white">
-            Comanda
-          </button>
-        </div>
+        <div onClick={toggleOffCanvas}>Comanda</div>
       </footer>
 
       {/* OffCanvas con los productos seleccionados */}
