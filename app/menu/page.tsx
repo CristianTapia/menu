@@ -48,11 +48,11 @@ export default function Menu() {
         <Products onOrderClickAction={addProdToCart} selectedCategory={selectedCategory} />
       </div>
 
-      <footer className="bg-red-700 text-center grid grid-cols-4 w-full items-center">
-        <div>IA</div>
-        <div>Atención</div>
-        <div>Cuenta</div>
-        <div onClick={toggleOffCanvas}>Comanda</div>
+      <footer className="bg-red-700 text-center grid grid-cols-2 w-full items-center">
+        <div className="text-sm">Sugerencias/reclamos</div>
+        <div className="text-sm">Ubicación</div>
+        {/* <div>Cuenta</div> */}
+        {/* <div onClick={toggleOffCanvas}>Comanda</div> */}
       </footer>
 
       {/* <footer

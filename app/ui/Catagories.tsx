@@ -15,7 +15,7 @@ export default function Categories({
     onCategorySelectionAction(category);
   }
   return (
-    <div className="flex items-center w-full overflow-x-auto gap-2 px-2 py-2 bg-white">
+    <div className="flex items-center w-full overflow-x-auto gap-2 px-0 py-2 bg-white">
       {/* 🔹 Botón "Todas" fijo */}
       <button
         onClick={() => handleCategoryClick(null)}
