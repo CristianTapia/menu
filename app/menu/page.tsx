@@ -55,6 +55,18 @@ export default function Menu() {
         <div onClick={toggleOffCanvas}>Comanda</div>
       </footer>
 
+      {/* <footer
+        className="fixed bottom-0 left-0 right-0 z-50 bg-red-700 text-white text-center grid grid-cols-2 sm:grid-cols-4 items-center py-3 text-sm"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <div>IA</div>
+        <div>Atención</div>
+        <div>Cuenta</div>
+        <div onClick={toggleOffCanvas} className="cursor-pointer">
+          Comanda
+        </div>
+      </footer> */}
+
       {/* OffCanvas con los productos seleccionados */}
       <OffCanvas grandTotal={grandTotalValue} isOpen={isOffCanvasOpen} onCloseAction={toggleOffCanvas}>
         <div className="flex flex-col gap-4">
