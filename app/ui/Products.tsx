@@ -3,6 +3,7 @@
 // import { useState } from "react";
 import { productArray } from "../lib/data";
 import Modal from "./Modals/Modal";
+import { useState } from "react";
 
 export default function Products({
   // onOrderClickAction,
@@ -18,10 +19,27 @@ export default function Products({
 }) {
   // const [plus, setPlus] = useState<Record<string, number>>({});
 
+  const [products] = useState(productArray);
+  const [selectedProducts, setSelectedProducts] = useState<
+    { name: string; price: number; quantity: number; category: string }[]
+  >([]);
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const selectedProduct = products.find((product) => product.id === selectedProductId);
+  const [activeModal, setActiveModal] = useState<null | "viewProduct">(null);
+
   // Filtrar productos por categoría
   const filteredDishes = selectedCategory
     ? productArray.filter((dish) => dish.category === selectedCategory)
     : productArray;
+
+  function openModal(modalName: "viewProduct", productId?: number) {
+    setActiveModal(modalName);
+    setSelectedProductId(productId ?? null);
+  }
+
+  function closeModal() {
+    setActiveModal(null);
+  }
 
   // function plusProd(id: string) {
   //   setPlus((prevPlus) => ({
@@ -68,6 +86,8 @@ export default function Products({
           >
             Ver info
           </button>
+
+          <Modal isOpen={activeModal === "viewProduct"} onCloseAction={closeModal} title="test" body="asdfkjasdf" />
 
           {/* + - Controles */}
           {/* <div className="flex flex-wrap justify-center items-center gap-2">
