@@ -1,6 +1,5 @@
 "use client";
 
-// import { useState } from "react";
 import { productArray } from "../lib/data";
 import Modal from "./Modals/Modal";
 import { useState } from "react";
@@ -20,11 +19,11 @@ export default function Products({
   // const [plus, setPlus] = useState<Record<string, number>>({});
 
   const [products] = useState(productArray);
-  const [selectedProducts, setSelectedProducts] = useState<
-    { name: string; price: number; quantity: number; category: string }[]
-  >([]);
+  // const [selectedProducts, setSelectedProducts] = useState<
+  //   { name: string; price: number; quantity: number; category: string }[]
+  // >([]);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
-  const selectedProduct = products.find((product) => product.id === selectedProductId);
+  // const selectedProduct = products.find((product) => product.id === selectedProductId);
   const [activeModal, setActiveModal] = useState<null | "viewProduct">(null);
 
   // Filtrar productos por categoría
@@ -93,7 +92,14 @@ export default function Products({
             Ver info
           </button>
 
-          <Modal isOpen={activeModal === "viewProduct"} onCloseAction={closeModal} title="test" body="asdfkjasdf" />
+          <Modal
+            isOpen={activeModal === "viewProduct"}
+            onCloseAction={closeModal}
+            title="test"
+            body="asdfkjasdf"
+            buttonAName="Salir"
+            onButtonAClickAction={closeModal}
+          />
 
           {/* + - Controles */}
           {/* <div className="flex flex-wrap justify-center items-center gap-2">
