@@ -72,7 +72,13 @@ export default function Products({
           {/* Nombre + Precio */}
           <div className="flex flex-col justify-center items-center sm:items-start gap-2">
             <div className="text-lg font-semibold">{option.name}</div>
-            <div className="text-base">${option.price}</div>
+            <div className="text-base">
+              {new Intl.NumberFormat("es-CL", {
+                style: "currency",
+                currency: "CLP",
+                minimumFractionDigits: 0,
+              }).format(option.price)}
+            </div>
           </div>
 
           <button
