@@ -4,31 +4,13 @@ import { productArray } from "../lib/data";
 import Modal from "./Modals/Modal";
 import { useState } from "react";
 
-export default function Products({
-  // onOrderClickAction,
-  selectedCategory,
-}: {
-  // onOrderClickAction?: (
-  //   productName: string,
-  //   productPrice: number,
-  //   productQuantity: number,
-  //   productCategory: string
-  // ) => void;
-  selectedCategory: string | null;
-}) {
-  // const [plus, setPlus] = useState<Record<string, number>>({});
-
+export default function Products({ selectedCategory }: { selectedCategory: string | null }) {
   const [products] = useState(productArray);
-  // const [selectedProducts, setSelectedProducts] = useState<
-  //   { name: string; price: number; quantity: number; category: string }[]
-  // >([]);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
-  // const selectedProduct = products.find((product) => product.id === selectedProductId);
   const [activeModal, setActiveModal] = useState<null | "viewProduct">(null);
 
-  // Filtrar productos por categoría
-  const filteredDishes = selectedCategory
-    ? productArray.filter((dish) => dish.category === selectedCategory)
+  const sortedProducts = selectedCategory
+    ? productArray.filter((product) => product.category === selectedCategory)
     : productArray;
 
   function openModal(modalName: "viewProduct", productId?: number) {
@@ -38,25 +20,14 @@ export default function Products({
 
   function closeModal() {
     setActiveModal(null);
+    setSelectedProductId(null);
   }
 
-  // function plusProd(id: string) {
-  //   setPlus((prevPlus) => ({
-  //     ...prevPlus,
-  //     [id]: (prevPlus[id] || 0) + 1,
-  //   }));
-  // }
-
-  // function minusProd(id: string) {
-  //   setPlus((prevPlus) => ({
-  //     ...prevPlus,
-  //     [id]: Math.max((prevPlus[id] || 0) - 1, 0),
-  //   }));
-  // }
+  const selectedProduct = products.find((p) => p.id === selectedProductId);
 
   return (
     <div className="flex flex-col gap-y-4">
-      {filteredDishes.map((option) => (
+      {sortedProducts.map((option) => (
         <div
           key={option.id}
           className="bg-blue-500 text-white rounded shadow p-4 flex flex-col sm:grid sm:grid-cols-3 gap-4"
@@ -84,45 +55,41 @@ export default function Products({
             className="bg-green-400 text-black px-3 py-1 rounded"
             onClick={() => {
               openModal("viewProduct", option.id);
-              // if ((plus[option.id] || 0) > 0) {
-              //   onOrderClickAction(option.name, option.price, plus[option.id], option.category);
-              // }
             }}
           >
             Ver info
           </button>
-
-          <Modal
-            isOpen={activeModal === "viewProduct"}
-            onCloseAction={closeModal}
-            title="test"
-            body="asdfkjasdf"
-            buttonAName="Salir"
-            onButtonAClickAction={closeModal}
-          />
-
-          {/* + - Controles */}
-          {/* <div className="flex flex-wrap justify-center items-center gap-2">
-            <button className="bg-yellow-400 text-black px-3 py-1 rounded" onClick={() => minusProd(option.id)}>
-              -
-            </button>
-            <span className="px-3 py-1 border rounded bg-white text-black">{plus[option.id] || 0}</span>
-            <button className="bg-yellow-400 text-black px-3 py-1 rounded" onClick={() => plusProd(option.id)}>
-              +
-            </button>
-            <button
-              className="bg-green-400 text-black px-3 py-1 rounded"
-              onClick={() => {
-                if ((plus[option.id] || 0) > 0) {
-                  onOrderClickAction(option.name, option.price, plus[option.id], option.category);
-                }
-              }}
-            >
-              Enviar
-            </button>
-          </div> */}
         </div>
       ))}
+
+      {/* Modal único fuera del map */}
+      <Modal
+        isOpen={activeModal === "viewProduct"}
+        onCloseAction={closeModal}
+        title={selectedProduct?.name ?? "Producto"}
+        body={
+          selectedProduct ? (
+            <div className="flex flex-col gap-2 text-sm text-gray-800">
+              <div>
+                <strong>Categoría:</strong> {selectedProduct.category}
+              </div>
+              <div>
+                <strong>Precio:</strong>{" "}
+                {new Intl.NumberFormat("es-CL", {
+                  style: "currency",
+                  currency: "CLP",
+                  minimumFractionDigits: 0,
+                }).format(selectedProduct.price)}
+              </div>
+              <div>
+                <strong>Descripción:</strong> {selectedProduct.description ?? "Sin descripción"}
+              </div>
+            </div>
+          ) : null
+        }
+        buttonAName="Cerrar"
+        onButtonAClickAction={closeModal}
+      />
     </div>
   );
 }
