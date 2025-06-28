@@ -9,7 +9,7 @@ export default function Menu() {
   return (
     <div className="flex flex-col h-screen">
       {/* Header: categorías */}
-      <div className="overflow-x-auto scrollbar-hide p-4 bg-white">
+      <div className="overflow-x-auto scrollbar-hide p-4">
         <Categories onCategorySelectionAction={setSelectedCategory} />
       </div>
 

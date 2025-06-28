@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { categoriesArray } from "../lib/data";
 
 export default function Categories({
@@ -9,13 +9,20 @@ export default function Categories({
   onCategorySelectionAction: (category: string | null) => void;
 }) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   function handleCategoryClick(category: string | null) {
     setActiveCategory(category);
     onCategorySelectionAction(category);
+
+    // Si se selecciona "Todas", se limpia la categoría activa
+    if (category === null && containerRef.current) {
+      containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
   }
+
   return (
-    <div className="flex items-center w-full overflow-x-auto gap-2 px-0 py-2 bg-white">
+    <div ref={containerRef} className="flex items-center w-full overflow-x-auto gap-2">
       {/* 🔹 Botón "Todas" fijo */}
       <button
         onClick={() => handleCategoryClick(null)}
