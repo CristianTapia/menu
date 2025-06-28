@@ -9,42 +9,63 @@ export default function Categories({
   onCategorySelectionAction: (category: string | null) => void;
 }) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   function handleCategoryClick(category: string | null) {
     setActiveCategory(category);
     onCategorySelectionAction(category);
 
-    // Si se selecciona "Todas", se limpia la categoría activa
-    if (category === null && containerRef.current) {
-      containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    if (category !== null && scrollRef.current) {
+      const btn = scrollRef.current.querySelector<HTMLButtonElement>(`[data-name="${category}"]`);
+      if (btn) {
+        btn.scrollIntoView({ behavior: "smooth", inline: "start" });
+      }
+    } else {
+      // si es "Todas", volvemos al inicio
+      scrollRef.current?.scrollTo({ left: 0, behavior: "smooth" });
     }
   }
 
   return (
-    <div ref={containerRef} className="flex items-center w-full overflow-x-auto gap-2">
-      {/* 🔹 Botón "Todas" fijo */}
+    <div className="flex items-center w-full py-2 px-2">
+      {/* “Todas” fuera del scroll */}
       <button
         onClick={() => handleCategoryClick(null)}
-        className={`sticky left-0 px-4 py-2 rounded whitespace-nowrap ${
-          activeCategory === null ? "bg-blue-500 text-white" : "bg-red-600 text-white"
-        }`}
+        className={`
+          flex-none px-4 py-2 whitespace-nowrap
+          ${
+            activeCategory === null
+              ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
+              : "text-gray-500"
+          }
+        `}
       >
         Todas
       </button>
 
-      {/* 🔹 Botones desplazables */}
-      {categoriesArray.map((option) => (
-        <button
-          key={option.id}
-          onClick={() => handleCategoryClick(option.name)}
-          className={`px-4 py-2 rounded whitespace-nowrap ${
-            activeCategory === option.name ? "bg-blue-500 text-white" : "bg-red-600 text-white"
-          }`}
-        >
-          {option.name}
-        </button>
-      ))}
+      {/* scroll-snap en el contenedor desplazable */}
+      <div ref={scrollRef} className="flex-1 overflow-x-auto scrollbar-hide scroll-snap-x mandatory">
+        <div className="flex items-center gap-2 px-2">
+          {categoriesArray.map((opt) => (
+            <button
+              key={opt.id}
+              data-name={opt.name}
+              onClick={() => handleCategoryClick(opt.name)}
+              className={`
+                scroll-snap-start
+                px-4 py-2 whitespace-nowrap
+                ${
+                  activeCategory === opt.name
+                    ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
+                    : "text-gray-500"
+                }
+              `}
+            >
+              {opt.name}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
