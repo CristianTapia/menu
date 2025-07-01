@@ -19,7 +19,7 @@ export default function Menu() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-red-700 text-white text-center py-4">
+      <footer className="bg-green-400 text-center py-4">
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-4">
           <span className="text-sm">Sugerencias/reclamos</span>
           <span className="text-sm">Ubicación</span>

@@ -28,10 +28,13 @@ export default function Products({ selectedCategory }: { selectedCategory: strin
   return (
     <div className="flex flex-col gap-y-4">
       {sortedProducts.map((option) => (
-        <div key={option.id} className="shadow inset-ring rounded p-4 flex flex-col  sm:grid-cols-3 gap-4">
+        <div
+          key={option.id}
+          className="shadow-xl/10 border border-gray-300 rounded p-4 flex flex-col  sm:grid-cols-3 gap-4"
+        >
           {/* Foto */}
           <div className="flex items-center justify-center">
-            <div className="w-24 h-24 border border-gray-300 rounded text-black flex items-center justify-center text-sm">
+            <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center text-sm">
               Foto
             </div>
           </div>
