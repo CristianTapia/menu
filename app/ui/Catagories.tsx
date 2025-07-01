@@ -27,12 +27,12 @@ export default function Categories({
   }
 
   return (
-    <div className="flex items-center w-full py-2 px-2">
+    <div className="flex items-center w-full">
       {/* “Todas” fuera del scroll */}
       <button
         onClick={() => handleCategoryClick(null)}
         className={`
-          flex-none px-4 py-2 whitespace-nowrap
+          flex-none whitespace-nowrap
           ${
             activeCategory === null
               ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
@@ -44,8 +44,8 @@ export default function Categories({
       </button>
 
       {/* scroll-snap en el contenedor desplazable */}
-      <div ref={scrollRef} className="flex-1 overflow-x-auto scrollbar-hide scroll-snap-x mandatory">
-        <div className="flex items-center gap-2 px-2">
+      <div ref={scrollRef} className="flex-1 overflow-x-auto">
+        <div className="flex items-center px-2">
           {categoriesArray.map((opt) => (
             <button
               key={opt.id}
@@ -53,7 +53,7 @@ export default function Categories({
               onClick={() => handleCategoryClick(opt.name)}
               className={`
                 scroll-snap-start
-                px-4 py-2 whitespace-nowrap
+                px-2 py-2 whitespace-nowrap
                 ${
                   activeCategory === opt.name
                     ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
