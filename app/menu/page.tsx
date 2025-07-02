@@ -1,30 +1,10 @@
-"use client";
-import { useState } from "react";
-import Categories from "../ui/Catagories";
-import Products from "../ui/Products";
+import ClientMenu from "../ui/ClientMenu";
 
-export default function Menu() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+export default async function Page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000"}/api/products`, {
+    next: { revalidate: 0 },
+  });
+  const products = await res.json();
 
-  return (
-    <div className="flex flex-col h-screen">
-      {/* Header: categorías */}
-      <div className="overflow-x-auto scrollbar-hide p-4">
-        <Categories onCategorySelectionAction={setSelectedCategory} />
-      </div>
-
-      {/* Main: área de productos */}
-      <main className="flex-1 overflow-y-auto p-4 min-h-0">
-        <Products selectedCategory={selectedCategory} />
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-green-400 text-center py-4">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 gap-4">
-          <span className="text-sm">Sugerencias/reclamos</span>
-          <span className="text-sm">Ubicación</span>
-        </div>
-      </footer>
-    </div>
-  );
+  return <ClientMenu products={products} />;
 }
