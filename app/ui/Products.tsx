@@ -18,7 +18,6 @@ export default function Products({
   products: Product[];
   selectedCategory: string | null;
 }) {
-  // const [products] = useState(productArray);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [activeModal, setActiveModal] = useState<null | "viewProduct">(null);
 
