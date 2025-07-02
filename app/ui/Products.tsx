@@ -1,6 +1,5 @@
 "use client";
 
-// import { productArray } from "../lib/data";
 import Modal from "./Modals/Modal";
 import { useState } from "react";
 
