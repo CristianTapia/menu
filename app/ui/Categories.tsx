@@ -28,24 +28,22 @@ export default function Categories({
 
   return (
     <div className="flex items-center w-full">
-      {/* “Todas” fuera del scroll */}
-      <button
-        onClick={() => handleCategoryClick(null)}
-        className={`
-          flex-none whitespace-nowrap
+      {/* scroll-snap en el contenedor desplazable */}
+      <div ref={scrollRef} className="flex-1 overflow-x-auto">
+        <div className="flex items-center px-2">
+          <button
+            onClick={() => handleCategoryClick(null)}
+            className={`
+          flex-none whitespace-nowrap pr-2 py-2
           ${
             activeCategory === null
               ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
               : "text-gray-500"
           }
         `}
-      >
-        Todas
-      </button>
-
-      {/* scroll-snap en el contenedor desplazable */}
-      <div ref={scrollRef} className="flex-1 overflow-x-auto">
-        <div className="flex items-center px-2">
+          >
+            Todas
+          </button>
           {categoriesArray.map((opt) => (
             <button
               key={opt.id}
