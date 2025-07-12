@@ -4,6 +4,8 @@ import { useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
 
+import { ChatBubbleLeftEllipsisIcon, MapPinIcon } from "@heroicons/react/24/outline";
+
 interface Product {
   id: number;
   name: string;
@@ -25,8 +27,22 @@ export default function ClientMenu({ products }: { products: Product[] }) {
       </main>
       <footer className="bg-green-400 text-center py-4">
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-4">
-          <span className="text-sm">Sugerencias/reclamos</span>
-          <span className="text-sm">Ubicación</span>
+          <button
+            type="button"
+            aria-label="IAyuda"
+            className="flex flex-col items-center text-white hover:text-gray-200"
+          >
+            <ChatBubbleLeftEllipsisIcon className="h-6 w-6" />
+            <span className="sr-only">IAyuda</span>
+          </button>
+          <button
+            type="button"
+            aria-label="Ubicación"
+            className="flex flex-col items-center text-white hover:text-gray-200"
+          >
+            <MapPinIcon className="h-6 w-6" />
+            <span className="sr-only">Ubicación</span>
+          </button>
         </div>
       </footer>
     </div>
