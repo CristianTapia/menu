@@ -45,7 +45,7 @@ export default function Modal({
             {/* Modal footer */}
             <div className="pt-4 pl-4">
               {buttonAName && (
-                <button onClick={onButtonAClickAction} className="p-2 bg-green-600 text-white rounded cursor-pointer">
+                <button onClick={onButtonAClickAction} className="p-2 bg-green-400 text-white rounded cursor-pointer">
                   {buttonAName}
                 </button>
               )}
