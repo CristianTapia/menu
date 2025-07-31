@@ -14,13 +14,18 @@ interface Product {
   description?: string;
 }
 
-export default function ClientMenu({ products }: { products: Product[] }) {
+interface Category {
+  id: number;
+  name: string;
+}
+
+export default function ClientMenu({ products, categories }: { products: Product[]; categories: Category[] }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col h-screen">
       <div className="overflow-x-auto scrollbar-hide p-4 bg-white">
-        <Categories onCategorySelectionAction={setSelectedCategory} />
+        <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </div>
       <main className="flex-1 overflow-y-auto p-4 min-h-0 bg-gray-50">
         <Products products={products} selectedCategory={selectedCategory} />

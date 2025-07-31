@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { categoriesArray } from "../../lib/data";
+
+interface Category {
+  id: number;
+  name: string;
+}
 
 export default function Categories({
+  categories,
   onCategorySelectionAction,
 }: {
+  categories: Category[];
   onCategorySelectionAction: (category: string | null) => void;
 }) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -44,7 +50,7 @@ export default function Categories({
           >
             Todas
           </button>
-          {categoriesArray.map((opt) => (
+          {categories.map((opt) => (
             <button
               key={opt.id}
               data-name={opt.name}
