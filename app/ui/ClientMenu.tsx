@@ -24,13 +24,13 @@ export default function ClientMenu({ products, categories }: { products: Product
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
-      <div className="overflow-x-auto p-4 bg-white shadow-md z-10 ">
+      <div className="overflow-x-auto p-4 bg-[var(--color-surface)] text-[var(--color-foreground)] shadow-md z-10 ">
         <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </div>
       <main className="flex-1 overflow-y-auto p-4 min-h-0 bg-[#F2F2F2]">
         <Products products={products} selectedCategory={selectedCategory} />
       </main>
-      <footer className="bg-green-400 text-center py-4">
+      <footer className="bg-[var(--color-primary)] text-center py-4">
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-4">
           <button
             type="button"
