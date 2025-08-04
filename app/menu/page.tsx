@@ -1,20 +1,24 @@
+// app/menu/page.tsx
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import ClientMenu from "../ui/ClientMenu";
-import { headers } from "next/headers";
 
 export default async function Page() {
-  const host = (await headers()).get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-  const base = `${protocol}://${host}`;
+  const supabase = await createSupabaseServerClient();
 
-  const res = await fetch(`${base}/api/products`, {
-    next: { revalidate: 10 },
-  });
-  const products = await res.json();
+  const { data: products = [], error: prodError } = await supabase
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  const catRes = await fetch(`${base}/api/categories`, {
-    next: { revalidate: 10 },
-  });
-  const categories = await catRes.json();
+  const { data: categories = [], error: catError } = await supabase
+    .from("categories")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  return <ClientMenu products={products} categories={categories} />;
+  if (prodError || catError) {
+    console.error("Error en Supabase:", prodError ?? catError);
+    return <div>Error cargando datos</div>;
+  }
+
+  return <ClientMenu products={products ?? []} categories={categories ?? []} />;
 }
