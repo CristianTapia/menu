@@ -43,8 +43,8 @@ export default function Categories({
           flex-none whitespace-nowrap pr-2 py-2
           ${
             activeCategory === null
-              ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
-              : "text-gray-500"
+              ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[var(--color-foreground)]"
+              : "text-[var(--color-category)]"
           }
         `}
           >
@@ -60,8 +60,8 @@ export default function Categories({
                 px-2 py-2 whitespace-nowrap
                 ${
                   activeCategory === opt.name
-                    ? "underline underline-offset-5 decoration-2 decoration-white-500 text-white-600"
-                    : "text-gray-500"
+                    ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[var(--color-foreground)]"
+                    : "text-[var(--color-category)]"
                 }
               `}
             >
