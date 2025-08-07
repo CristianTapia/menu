@@ -8,7 +8,7 @@ interface Product {
   name: string;
   price: number;
   stock?: number;
-  // description?: string;
+  description?: string;
   category: {
     id: number;
     name: string;
@@ -97,9 +97,9 @@ export default function Products({
                   minimumFractionDigits: 0,
                 }).format(selectedProduct.price)}
               </div>
-              {/* <div>
+              <div>
                 <strong>Descripción:</strong> {selectedProduct.description ?? "Sin descripción"}
-              </div> */}
+              </div>
             </div>
           ) : null
         }

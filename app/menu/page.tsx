@@ -7,7 +7,7 @@ export default async function Page() {
 
   const { data: products = [], error: prodError } = await supabase
     .from("products")
-    .select("id, name, price, stock, category:categories(id, name)")
+    .select("id, name, price, stock, description, category:categories(id, name)")
     .order("created_at", { ascending: false });
 
   const { data: categories = [], error: catError } = await supabase
