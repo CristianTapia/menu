@@ -10,8 +10,11 @@ interface Product {
   id: number;
   name: string;
   price: number;
-  category: string;
-  description?: string;
+  // description?: string;
+  category: {
+    id: number;
+    name: string;
+  };
 }
 
 interface Category {
@@ -20,7 +23,7 @@ interface Category {
 }
 
 export default function ClientMenu({ products, categories }: { products: Product[]; categories: Category[] }) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   return (
     <div className="flex flex-col h-screen bg-[var(--color-background)]">

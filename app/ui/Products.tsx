@@ -7,9 +7,12 @@ interface Product {
   id: number;
   name: string;
   price: number;
-  category: string;
   stock?: number;
-  description?: string;
+  // description?: string;
+  category: {
+    id: number;
+    name: string;
+  };
 }
 
 export default function Products({
@@ -17,13 +20,13 @@ export default function Products({
   selectedCategory,
 }: {
   products: Product[];
-  selectedCategory: string | null;
+  selectedCategory: number | null;
 }) {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [activeModal, setActiveModal] = useState<null | "viewProduct">(null);
 
   const sortedProducts = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory)
+    ? products.filter((product) => product.category?.id === selectedCategory)
     : products;
 
   function openModal(modalName: "viewProduct", productId?: number) {
@@ -84,7 +87,7 @@ export default function Products({
           selectedProduct ? (
             <div className="flex flex-col gap-2 text-sm text-gray-800">
               <div>
-                <strong>Categoría:</strong> {selectedProduct.category}
+                <strong>Categoría:</strong> {selectedProduct.category.name}
               </div>
               <div>
                 <strong>Precio:</strong>{" "}
@@ -94,9 +97,9 @@ export default function Products({
                   minimumFractionDigits: 0,
                 }).format(selectedProduct.price)}
               </div>
-              <div>
+              {/* <div>
                 <strong>Descripción:</strong> {selectedProduct.description ?? "Sin descripción"}
-              </div>
+              </div> */}
             </div>
           ) : null
         }

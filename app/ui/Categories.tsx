@@ -12,17 +12,17 @@ export default function Categories({
   onCategorySelectionAction,
 }: {
   categories: Category[];
-  onCategorySelectionAction: (category: string | null) => void;
+  onCategorySelectionAction: (category: number | null) => void;
 }) {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  function handleCategoryClick(category: string | null) {
-    setActiveCategory(category);
-    onCategorySelectionAction(category);
+  function handleCategoryClick(id: number | null) {
+    setActiveCategory(id);
+    onCategorySelectionAction(id);
 
-    if (category !== null && scrollRef.current) {
-      const btn = scrollRef.current.querySelector<HTMLButtonElement>(`[data-name="${category}"]`);
+    if (id !== null && scrollRef.current) {
+      const btn = scrollRef.current.querySelector<HTMLButtonElement>(`[data-name="${id}"]`);
       if (btn) {
         btn.scrollIntoView({ behavior: "smooth", inline: "start" });
       }
@@ -53,13 +53,13 @@ export default function Categories({
           {categories.map((opt) => (
             <button
               key={opt.id}
-              data-name={opt.name}
-              onClick={() => handleCategoryClick(opt.name)}
+              data-id={opt.id}
+              onClick={() => handleCategoryClick(opt.id)}
               className={`
                 scroll-snap-start
                 px-2 py-2 whitespace-nowrap
                 ${
-                  activeCategory === opt.name
+                  activeCategory === opt.id
                     ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[var(--color-foreground)]"
                     : "text-[var(--color-category)]"
                 }

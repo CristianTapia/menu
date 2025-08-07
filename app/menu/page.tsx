@@ -7,7 +7,7 @@ export default async function Page() {
 
   const { data: products = [], error: prodError } = await supabase
     .from("products")
-    .select("*")
+    .select("id, name, price, stock, category:categories(id, name)")
     .order("created_at", { ascending: false });
 
   const { data: categories = [], error: catError } = await supabase
@@ -20,5 +20,10 @@ export default async function Page() {
     return <div>Error cargando datos</div>;
   }
 
-  return <ClientMenu products={products ?? []} categories={categories ?? []} />;
+  const mappedProducts = (products ?? []).map((product: any) => ({
+    ...product,
+    category: Array.isArray(product.category) ? product.category[0] ?? null : product.category,
+  }));
+
+  return <ClientMenu products={mappedProducts} categories={categories ?? []} />;
 }
