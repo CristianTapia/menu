@@ -1,4 +1,3 @@
-// app/menu/page.tsx
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import ClientMenu from "../ui/ClientMenu";
 
