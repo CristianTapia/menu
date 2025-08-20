@@ -2,6 +2,7 @@
 
 import Modal from "./Modals/Modal";
 import { useState } from "react";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -13,6 +14,7 @@ interface Product {
     id: number;
     name: string;
   };
+  image_url?: string | null;
 }
 
 export default function Products({
@@ -50,9 +52,20 @@ export default function Products({
         >
           {/* Foto */}
           <div className="flex items-center justify-center">
-            <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center text-sm">
-              Foto
-            </div>
+            {product.image_url ? (
+              <Image
+                src={product.image_url}
+                alt={product.name}
+                width={96}
+                height={96}
+                className="w-24 h-24 object-cover rounded border"
+                unoptimized
+              />
+            ) : (
+              <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center text-sm">
+                Sin foto
+              </div>
+            )}
           </div>
 
           {/* Nombre + Precio */}
