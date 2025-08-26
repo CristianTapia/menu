@@ -1,8 +1,28 @@
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { createSupabaseAdmin } from "@/lib/supabaseAdmin";
 import ClientMenu from "../ui/ClientMenu";
+import { cookies } from "next/headers";
 
 export default async function Page() {
+  // TRAER DATOS DESDE LA API
+  // 1) Categorias
+  const base = process.env.NEXT_PUBLIC_SITE_URL /* prod */ ?? "http://localhost:3001"; /* dev: confirma tu puerto */
+
+  const catRes = await fetch(`${base}/api/categories`, {
+    method: "GET",
+    // headers: { cookie: cookies().toString() }, // reenvía sesión si la API usa RLS
+    cache: "no-store",
+    // next: { tags: ["categories"] }, // opcional: para revalidar con ISR
+  });
+
+  if (!catRes.ok) {
+    const err = await catRes.json().catch(() => ({}));
+    throw new Error(`Error categorías: ${err?.error ?? catRes.statusText}`);
+  }
+
+  const categories: Array<{ id: number; name: string }> = await catRes.json();
+
+  // TRAER DATOS DIRECTAMENTE CON SUPABASE
   // 1) leer datos con anon (SSR)
   const supabase = await createSupabaseServerClient();
 
@@ -11,13 +31,8 @@ export default async function Page() {
     .select("id, name, price, stock, description, category:categories(id, name), image_path")
     .order("created_at", { ascending: false });
 
-  const { data: categories = [], error: catError } = await supabase
-    .from("categories")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (prodError || catError) {
-    console.error("Error en Supabase:", prodError ?? catError);
+  if (prodError) {
+    console.error("Error en Supabase:", prodError);
     return <div>Error cargando datos</div>;
   }
 
