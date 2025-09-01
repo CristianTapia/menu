@@ -3,24 +3,9 @@
 import { useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
+import { Product, Category } from "@/lib/types";
 
 import { ChatBubbleLeftEllipsisIcon, MapPinIcon } from "@heroicons/react/24/outline";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  description?: string;
-  category: {
-    id: number;
-    name: string;
-  };
-}
-
-interface Category {
-  id: number;
-  name: string;
-}
 
 export default function ClientMenu({ products, categories }: { products: Product[]; categories: Category[] }) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);

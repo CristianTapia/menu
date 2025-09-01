@@ -1,11 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-
-interface Category {
-  id: number;
-  name: string;
-}
+import { Category } from "@/lib/types";
 
 export default function Categories({
   categories,

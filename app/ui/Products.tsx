@@ -3,19 +3,7 @@
 import Modal from "./Modals/Modal";
 import { useState } from "react";
 import Image from "next/image";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  stock?: number;
-  description?: string;
-  category: {
-    id: number;
-    name: string;
-  };
-  image_url?: string | null;
-}
+import { Product } from "@/lib/types";
 
 export default function Products({
   products,

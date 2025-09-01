@@ -1,13 +1,14 @@
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { createSupabaseAdmin } from "@/lib/supabaseAdmin";
 import ClientMenu from "../ui/ClientMenu";
-import { cookies } from "next/headers";
+import { Product } from "@/lib/types";
 
 export default async function Page() {
   // TRAER DATOS DESDE LA API
-  // 1) Categorias
+
   const base = process.env.NEXT_PUBLIC_SITE_URL /* prod */ ?? "http://localhost:3001"; /* dev: confirma tu puerto */
 
+  // 1) CATEGORIAS
   const catRes = await fetch(`${base}/api/categories`, {
     method: "GET",
     // headers: { cookie: cookies().toString() }, // reenvía sesión si la API usa RLS
@@ -22,19 +23,23 @@ export default async function Page() {
 
   const categories: Array<{ id: number; name: string }> = await catRes.json();
 
+  // 2) PRODUCTOS
+
+  const prodRes = await fetch(`${base}/api/products`, {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (!prodRes.ok) {
+    const err = await prodRes.json().catch(() => ({}));
+    throw new Error(`Error categorías: ${err?.error ?? prodRes.statusText}`);
+  }
+
+  const products: Product[] = await prodRes.json();
+
   // TRAER DATOS DIRECTAMENTE CON SUPABASE
   // 1) leer datos con anon (SSR)
   const supabase = await createSupabaseServerClient();
-
-  const { data: products = [], error: prodError } = await supabase
-    .from("products")
-    .select("id, name, price, stock, description, category:categories(id, name), image_path")
-    .order("created_at", { ascending: false });
-
-  if (prodError) {
-    console.error("Error en Supabase:", prodError);
-    return <div>Error cargando datos</div>;
-  }
 
   // 2) firmar imágenes con service_role (solo server)
   const admin = createSupabaseAdmin();
@@ -57,7 +62,7 @@ export default async function Page() {
   // 3) normalizar relación y añadir image_url
   const mappedProducts = (products ?? []).map((product: any) => ({
     ...product,
-    category: Array.isArray(product.category) ? product.category[0] ?? null : product.category,
+    // category: Array.isArray(product.category) ? product.category[0] ?? null : product.category,
     image_url: product.image_path ? mapPathToUrl.get(product.image_path) ?? null : null,
   }));
 
