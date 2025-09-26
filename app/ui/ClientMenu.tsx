@@ -5,7 +5,8 @@ import Categories from "./Categories";
 import Products from "./Products";
 import { Product, Category } from "@/lib/types";
 
-import { ChatBubbleLeftEllipsisIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { MapPinIcon } from "@heroicons/react/24/outline";
+import { ShoppingCart } from "lucide-react";
 
 export default function ClientMenu({ products, categories }: { products: Product[]; categories: Category[] }) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -25,8 +26,8 @@ export default function ClientMenu({ products, categories }: { products: Product
             aria-label="IAyuda"
             className="flex flex-col items-center text-white hover:text-gray-200"
           >
-            <ChatBubbleLeftEllipsisIcon className="h-6 w-6" />
-            <span className="sr-only">IAyuda</span>
+            <ShoppingCart className="h-6 w-6" aria-label="Producto añadido" />
+            <span className="sr-only">Comanda</span>
           </button>
           <button
             type="button"
