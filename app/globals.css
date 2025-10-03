@@ -4,8 +4,9 @@
   --color-background: #f5f5f5;
   --color-foreground: #1f2937; /* texto general (gris oscuro) */
   --color-category: #21111199; /* texto de categorías (gris medio) */
+  --color-dish: #bcb7b7; /* Texto card platos (gris claro) */
   --color-muted: #6b7280; /* texto secundario */
-  --color-primary: #00e676; /* verde principal (botones, iconos activos) */
+  --color-primary: #ea2831; /* verde principal (botones, iconos activos) */
   --color-accent: #009e60; /* verde más oscuro (hover, detalles) */
   --color-border: #e5e7eb; /* líneas, separadores */
   --color-surface: #ffffff; /* cards, fondos blancos */
