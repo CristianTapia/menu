@@ -13,7 +13,9 @@ export default function ClientMenu({ products, categories }: { products: Product
 
   return (
     <div className="flex flex-col h-screen bg-[var(--color-background)]">
-      <div className="overflow-x-auto p-4 bg-[var(--color-surface)] text-[var(--color-foreground)] shadow-md z-10">
+      {/* bg-[var(--color-surface)] --SACADO-- */}
+      <div className="overflow-x-auto p-4 text-[var(--color-foreground)] ">
+        <div className="items-center text-center text-lg font-bold pt-2">Menú</div>
         <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </div>
       <main className="flex-1 overflow-y-auto p-4 min-h-0 bg-[var(--color-background)]">

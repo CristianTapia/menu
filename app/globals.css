@@ -3,7 +3,7 @@
 :root {
   --color-background: #f5f5f5;
   --color-foreground: #1f2937; /* texto general (gris oscuro) */
-  --color-category: #4b5563; /* texto de categorías (gris medio) */
+  --color-category: #21111199; /* texto de categorías (gris medio) */
   --color-muted: #6b7280; /* texto secundario */
   --color-primary: #00e676; /* verde principal (botones, iconos activos) */
   --color-accent: #009e60; /* verde más oscuro (hover, detalles) */

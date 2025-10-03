@@ -29,7 +29,7 @@ export default function Categories({
   }
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center w-full p-4">
       {/* scroll-snap en el contenedor desplazable */}
       <div ref={scrollRef} className="flex-1 overflow-x-auto no-scrollbar">
         <div className="flex items-center px-2">
@@ -39,7 +39,7 @@ export default function Categories({
           flex-none whitespace-nowrap pr-2 py-2
           ${
             activeCategory === null
-              ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[var(--color-foreground)]"
+              ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[#EA2831]"
               : "text-[var(--color-category)]"
           }
         `}
@@ -56,7 +56,7 @@ export default function Categories({
                 px-2 py-2 whitespace-nowrap
                 ${
                   activeCategory === opt.id
-                    ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[var(--color-foreground)]"
+                    ? "underline underline-offset-5 decoration-2 decoration-white-500 text-[#EA2831]"
                     : "text-[var(--color-category)]"
                 }
               `}
