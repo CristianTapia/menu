@@ -39,7 +39,7 @@ export default function Products({
         <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
           Sin foto
         </div>
-        <p className="text-sm text-[var(--color-category)]">
+        <p className="pt-2 text-sm text-[var(--color-category)]">
           asdfasdf asdf as dfa sdf as dflaskdflaskdjflkasjf asdf as dfoasdfasdfas,kjhfaskdj
         </p>
       </div>
