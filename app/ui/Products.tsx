@@ -34,8 +34,17 @@ export default function Products({
 
   return (
     <div className="flex flex-col gap-y-2">
+      <div className="p-2 pt-25 text-lg text-[var(--color-foreground)] mb-2">
+        <h1 className="pb-3 font-bold">Destacados</h1>
+        <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
+          Sin foto
+        </div>
+        <p className="text-sm text-[var(--color-category)]">
+          asdfasdf asdf as dfa sdf as dflaskdflaskdjflkasjf asdf as dfoasdfasdfas,kjhfaskdj
+        </p>
+      </div>
       {sortedProducts.map((product) => (
-        <div key={product.id} className="rounded p-2 flex flex-row sm:grid-cols-3 gap-2">
+        <div key={product.id} className="p-2 flex flex-row sm:grid-cols-3 gap-2">
           {/* Foto */}
           {product.image_url ? (
             <Image
@@ -43,11 +52,11 @@ export default function Products({
               alt={product.name}
               width={96}
               height={96}
-              className="w-24 h-24 object-cover rounded border"
+              className="w-24 h-24 object-cover rounded-xl border"
               unoptimized
             />
           ) : (
-            <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center text-xs">
+            <div className="w-24 h-24 border border-gray-300 rounded-xl flex items-center justify-center text-xs">
               Sin foto
             </div>
           )}
