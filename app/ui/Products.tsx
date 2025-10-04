@@ -33,7 +33,7 @@ export default function Products({
   const selectedProduct = products.find((p) => p.id === selectedProductId);
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-2">
       {sortedProducts.map((product) => (
         <div key={product.id} className="rounded p-2 flex flex-row sm:grid-cols-3 gap-2">
           {/* Foto */}

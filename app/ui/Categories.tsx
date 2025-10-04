@@ -29,7 +29,7 @@ export default function Categories({
   }
 
   return (
-    <div className="flex items-center w-full font-semibold">
+    <div className="flex items-center w-full font-bold">
       {/* scroll-snap en el contenedor desplazable */}
       <div ref={scrollRef} className="flex-1 overflow-x-auto no-scrollbar">
         <div className="flex items-center">

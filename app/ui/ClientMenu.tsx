@@ -4,39 +4,29 @@ import { useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
 import { Product, Category } from "@/lib/types";
-
-import { MapPinIcon } from "@heroicons/react/24/outline";
-import { ShoppingCart } from "lucide-react";
+import { ReceiptText, MapPin } from "lucide-react";
 
 export default function ClientMenu({ products, categories }: { products: Product[]; categories: Category[] }) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   return (
     <div className="flex flex-col h-screen bg-[var(--color-background)]">
-      <div className="overflow-x-auto p-3 text-[var(--color-foreground)] ">
+      <div className="fixed inset-x-0 top-0 overflow-x-auto p-3 text-[var(--color-foreground)] bg-[rgb(var(--color-background-rgb)/0.92)] ">
         <div className="items-center text-center text-lg font-bold p-2">Menú</div>
         <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </div>
       <main className="flex-1 overflow-y-auto p-4 min-h-0 bg-[var(--color-background)]">
         <Products products={products} selectedCategory={selectedCategory} />
       </main>
-      <footer className="bg-[var(--color-primary)] text-center py-4">
+      <footer className="fixed inset-x-0 bottom-0 border-t border-[var(--color-primary)] bg-[rgb(var(--color-background-rgb)/0.95)] text-center py-4">
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-4">
-          <button
-            type="button"
-            aria-label="IAyuda"
-            className="flex flex-col items-center text-white hover:text-gray-200"
-          >
-            <ShoppingCart className="h-6 w-6" aria-label="Producto añadido" />
-            <span className="sr-only">Comanda</span>
+          <button type="button" aria-label="Comanda" className="flex flex-col items-center">
+            <ReceiptText color="#21111199" className="h-6 w-6" aria-label="Producto añadido" />
+            <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
           </button>
-          <button
-            type="button"
-            aria-label="Ubicación"
-            className="flex flex-col items-center text-white hover:text-gray-200"
-          >
-            <MapPinIcon className="h-6 w-6" />
-            <span className="sr-only">Ubicación</span>
+          <button type="button" aria-label="Ubicación" className="flex flex-col items-center">
+            <MapPin color="#21111199" className="h-6 w-6" />
+            <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">Ubicación</span>
           </button>
         </div>
       </footer>
