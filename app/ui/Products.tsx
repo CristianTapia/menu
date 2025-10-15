@@ -33,7 +33,7 @@ export default function Products({
   const selectedProduct = products.find((p) => p.id === selectedProductId);
 
   return (
-    <div className="flex flex-col gap-y-2">
+    <div className="flex flex-col gap-y-2 pb-5">
       <div className="p-2 pt-25 text-lg text-[var(--color-foreground)] mb-2">
         <h1 className="pb-3 font-bold">Destacados</h1>
         <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
