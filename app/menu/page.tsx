@@ -1,7 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { createSupabaseAdmin } from "@/lib/supabaseAdmin";
 import ClientMenu from "../ui/ClientMenu";
-import { Product } from "@/lib/types";
+import { Product, Highlight } from "@/lib/types";
 
 export default async function Page() {
   // TRAER DATOS DESDE LA API
@@ -36,6 +36,20 @@ export default async function Page() {
   }
 
   const products: Product[] = await prodRes.json();
+
+  // 3) DESTACADOS
+
+  const highRes = await fetch(`${base}/api/highlights`, {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (!highRes.ok) {
+    const err = await highRes.json().catch(() => ({}));
+    throw new Error(`Error highlights: ${err?.error ?? highRes.statusText}`);
+  }
+
+  const highlights: Highlight[] = await highRes.json();
 
   // TRAER DATOS DIRECTAMENTE CON SUPABASE
   // 1) leer datos con anon (SSR)

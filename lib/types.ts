@@ -15,3 +15,9 @@ export type Category = {
   id: number;
   name: string;
 };
+
+export type Highlight = {
+  id: number;
+  description: string;
+  image_url?: string | null;
+};
