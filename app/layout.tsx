@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html className="bg-[var(--color-background)]" lang="es">
       <body className={`${plusJakarta.className} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   );

@@ -3,10 +3,18 @@
 import { useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
-import { Product, Category } from "@/lib/types";
+import { Product, Category, Highlight } from "@/lib/types";
 import { ReceiptText, MapPin } from "lucide-react";
 
-export default function ClientMenu({ products, categories }: { products: Product[]; categories: Category[] }) {
+export default function ClientMenu({
+  products,
+  categories,
+  highlights,
+}: {
+  products: Product[];
+  categories: Category[];
+  highlights: Highlight[];
+}) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   return (
@@ -16,7 +24,7 @@ export default function ClientMenu({ products, categories }: { products: Product
         <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </header>
       <main className="pb-[calc(4rem+env(safe-area-inset-bottom))] overflow-y-auto p-4 bg-[var(--color-background)]">
-        <Products products={products} selectedCategory={selectedCategory} />
+        <Products products={products} selectedCategory={selectedCategory} highlights={highlights} />
       </main>
       <footer className="fixed inset-x-0 bottom-0 border-t border-[var(--color-primary)] bg-[rgb(var(--color-background-rgb)/0.95)] text-center py-4">
         <div className="max-w-4xl mx-auto h-full grid grid-cols-2 gap-4">

@@ -80,5 +80,5 @@ export default async function Page() {
     image_url: product.image_path ? mapPathToUrl.get(product.image_path) ?? null : null,
   }));
 
-  return <ClientMenu products={mappedProducts} categories={categories ?? []} />;
+  return <ClientMenu products={mappedProducts} categories={categories ?? []} highlights={highlights} />;
 }

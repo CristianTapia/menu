@@ -3,14 +3,16 @@
 import Modal from "./Modals/Modal";
 import { useState } from "react";
 import Image from "next/image";
-import { Product } from "@/lib/types";
+import { Product, Highlight } from "@/lib/types";
 import { Info, ShoppingCart } from "lucide-react";
 
 export default function Products({
   products,
+  highlights,
   selectedCategory,
 }: {
   products: Product[];
+  highlights: Highlight[];
   selectedCategory: number | null;
 }) {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
