@@ -36,27 +36,32 @@ export default function Products({
 
   return (
     <div className="flex flex-col gap-y-2 pb-5">
-      <div className="flex-auto overflow-x-auto p-2 pt-25 text-lg text-[var(--color-foreground)] mb-2">
-        <h1 className="pb-3 font-bold">Destacados</h1>
-        {highlights.map((highlight) => (
-          <div key={highlight.id}>
-            {highlight.image_url ? (
-              <Image
-                src={highlight.image_url}
-                alt={highlight.id.toString()}
-                width={96}
-                height={96}
-                className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs"
-                unoptimized
-              />
-            ) : (
-              <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
-                Sin foto
+      <div className="fp-2 pt-25 text-lg text-[var(--color-foreground)] mb-2">
+        <section>
+          <h1 className="pb-3 font-bold">Destacados</h1>
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+            {highlights.map((highlight) => (
+              <div key={highlight.id} className="snap-start shrink-0 w-64 rounded-xl overflow-hidden">
+                {highlight.image_url ? (
+                  <Image
+                    src={highlight.image_url}
+                    alt={highlight.id.toString()}
+                    width={96}
+                    height={96}
+                    unoptimized
+                    loading="lazy"
+                    className="w-full h-30 flex items-center justify-center text-xs"
+                  />
+                ) : (
+                  <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
+                    Sin foto
+                  </div>
+                )}
+                <p className="p-2 text-sm text-[var(--color-category)]">{highlight.description}</p>
               </div>
-            )}
-            <p className="pt-2 text-sm text-[var(--color-category)]">{highlight.description}</p>
+            ))}
           </div>
-        ))}
+        </section>
       </div>
       {sortedProducts.map((product) => (
         <div key={product.id} className="p-2 flex flex-row sm:grid-cols-3 gap-2">
@@ -67,8 +72,8 @@ export default function Products({
               alt={product.name}
               width={96}
               height={96}
-              className="w-24 h-24 object-cover rounded-xl border"
               unoptimized
+              className="w-24 h-24 object-cover rounded-xl border"
             />
           ) : (
             <div className="w-24 h-24 border border-gray-300 rounded-xl flex items-center justify-center text-xs">
