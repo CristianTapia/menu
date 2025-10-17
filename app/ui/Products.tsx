@@ -41,7 +41,7 @@ export default function Products({
           <h1 className="pb-3 font-bold">Destacados</h1>
           <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
             {highlights.map((highlight) => (
-              <div key={highlight.id} className="snap-start shrink-0 w-64 rounded-xl overflow-hidden">
+              <div key={highlight.id} className="snap-start shrink-0 w-64 overflow-hidden">
                 {highlight.image_url ? (
                   <Image
                     src={highlight.image_url}
@@ -50,7 +50,7 @@ export default function Products({
                     height={96}
                     unoptimized
                     loading="lazy"
-                    className="w-full h-30 flex items-center justify-center text-xs"
+                    className="w-full h-30 flex items-center rounded-xl justify-center text-xs"
                   />
                 ) : (
                   <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
