@@ -35,36 +35,43 @@ export default function Products({
   const selectedProduct = products.find((p) => p.id === selectedProductId);
   return (
     <div className="flex flex-col gap-y-2 pb-5">
-      <div className={`${highlights.length ? "" : "pt-20"} fp-2 text-lg text-[var(--color-foreground)] mb-2`}>
-        {/* <div className="pt-20 fp-2 text-lg text-[var(--color-foreground)] mb-2"> */}
+      <div className={`${highlights.length ? "" : "pt-20"} p-2 text-lg text-[var(--color-foreground)] mb-2`}>
         {highlights.length ? (
           <section className="pt-25">
             <h1 className="pb-3 font-bold">Destacados</h1>
-            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-              {highlights.map((highlight) => (
-                <div key={highlight.id} className="snap-start shrink-0 w-64 overflow-hidden">
-                  {highlight.image_url ? (
-                    <Image
-                      src={highlight.image_url}
-                      alt={highlight.id.toString()}
-                      width={96}
-                      height={96}
-                      unoptimized
-                      loading="lazy"
-                      className="w-full h-30 flex items-center rounded-xl justify-center text-xs"
-                    />
-                  ) : (
-                    <div className="w-full h-30 border rounded-xl border-gray-300 flex items-center justify-center text-xs">
-                      Sin foto
-                    </div>
-                  )}
-                  <p className="p-2 text-sm text-[var(--color-category)]">{highlight.description}</p>
-                </div>
-              ))}
+
+            {/* Carrusel 1-por-scroll con Tailwind + Scroll Snap */}
+            <div
+              className="overflow-x-auto snap-x snap-mandatory scroll-smooth w-full scrollbar-hide"
+              style={{ WebkitOverflowScrolling: "touch" }}
+            >
+              <div className="flex">
+                {highlights.map((highlight) => (
+                  <article key={highlight.id} className="snap-center snap-always shrink-0 basis-full w-full px-2">
+                    {highlight.image_url ? (
+                      <Image
+                        src={highlight.image_url}
+                        alt={highlight.id.toString()}
+                        width={1200}
+                        height={800}
+                        unoptimized
+                        loading="lazy"
+                        className="w-full h-40 sm:h-56 object-cover rounded-xl"
+                      />
+                    ) : (
+                      <div className="w-full h-40 sm:h-56 border rounded-xl border-gray-300 grid place-items-center text-xs">
+                        Sin foto
+                      </div>
+                    )}
+                    <p className="mt-2 text-sm text-[var(--color-category)]">{highlight.description}</p>
+                  </article>
+                ))}
+              </div>
             </div>
           </section>
         ) : null}
       </div>
+
       {sortedProducts.map((product) => (
         <div key={product.id} className="p-2 flex flex-row sm:grid-cols-3 gap-2">
           {/* Foto */}
