@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
+import ShareLocationButton from "./ShareLocationButton";
 import { Product, Category, Highlight } from "@/lib/types";
 import { ReceiptText, MapPin } from "lucide-react";
 
@@ -33,8 +34,12 @@ export default function ClientMenu({
             <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
           </button>
           <button type="button" aria-label="Ubicación" className="flex flex-col items-center">
-            <MapPin color="#21111199" className="h-6 w-6" />
-            <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">Ubicación</span>
+            <ShareLocationButton
+              name="Local de Comidas"
+              lat={-33.4489}
+              lng={-70.6693}
+              address="Av. Siempre Viva 123, Santiago"
+            />
           </button>
         </div>
       </footer>
