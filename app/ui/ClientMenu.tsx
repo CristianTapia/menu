@@ -29,18 +29,18 @@ export default function ClientMenu({
       </main>
       <footer className="fixed inset-x-0 bottom-0 border-t border-[var(--color-primary)] bg-[rgb(var(--color-background-rgb)/0.95)] text-center py-4">
         <div className="max-w-4xl mx-auto h-full grid grid-cols-2 gap-4">
-          <button type="button" aria-label="Comanda" className="flex flex-col items-center">
+          <div aria-label="Comanda" className="flex flex-col items-center">
             <ReceiptText color="#21111199" className="h-6 w-6" aria-label="Producto añadido" />
             <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
-          </button>
-          <button type="button" aria-label="Ubicación" className="flex flex-col items-center">
+          </div>
+          <div aria-label="Ubicación" className="flex flex-col items-center">
             <ShareLocationButton
               name="Local de Comidas"
               lat={-33.4489}
               lng={-70.6693}
               address="Av. Siempre Viva 123, Santiago"
             />
-          </button>
+          </div>
         </div>
       </footer>
     </div>
