@@ -36,7 +36,7 @@ export default function Products({
   return (
     <div className="flex flex-col gap-y-2 mb-5">
       {highlights.length ? (
-        <section className="px-2 text-lg text-[var(--color-foreground)]">
+        <section className="pb-2 text-lg text-[var(--color-foreground)]">
           <h1 className="pb-3 font-bold">Destacados</h1>
 
           {/* Carrusel con scroll snap */}
@@ -74,7 +74,7 @@ export default function Products({
       ) : null}
 
       {sortedProducts.map((product) => (
-        <div key={product.id} className="p-2 flex flex-row gap-2 items-start">
+        <div key={product.id} className="flex flex-row gap-2 items-start">
           {/* Foto */}
           {product.image_url ? (
             <Image
