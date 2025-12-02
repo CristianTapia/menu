@@ -4,7 +4,7 @@ import Modal from "./Modals/Modal";
 import { useState } from "react";
 import Image from "next/image";
 import { Product, Highlight } from "@/lib/types";
-import { Info, ShoppingCart } from "lucide-react";
+import { Info, ShoppingBasket } from "lucide-react";
 
 export default function Products({
   products,
@@ -73,7 +73,7 @@ export default function Products({
       </div>
 
       {sortedProducts.map((product) => (
-        <div key={product.id} className="p-2 flex flex-row sm:grid-cols-3 gap-2">
+        <div key={product.id} className="p-2 flex flex-row gap-2 items-start">
           {/* Foto */}
           {product.image_url ? (
             <Image
@@ -82,22 +82,22 @@ export default function Products({
               width={96}
               height={96}
               unoptimized
-              className="w-24 h-24 object-cover rounded-xl border"
+              className="w-24 h-24 object-cover rounded-xl border flex-none shrink-0"
             />
           ) : (
-            <div className="w-24 h-24 border border-gray-300 rounded-xl flex items-center justify-center text-xs">
+            <div className="w-24 h-24 flex-none shrink-0 border border-gray-300 rounded-xl flex items-center justify-center text-xs">
               Sin foto
             </div>
           )}
-          <div className="flex flex-col gap-2 items-start">
+          <div className="flex flex-col gap-2 items-start flex-1 min-w-0 text-xs">
             {/* Nombre */}
-            <div className="text-sm font-semibold">{product.name}</div>
+            <div className="font-semibold line-clamp-2">{product.name}</div>
             {/* Descripción */}
-            <div className="text-xs text-[var(--color-dish)]">{product.description}</div>
+            <div className="text-[var(--color-dish)] line-clamp-3">{product.description}</div>
             {/* Info extra */}
-            <div className="text-xs text-[var(--color-dish)]">Popular</div>
+            <div className="text-[var(--color-dish)]">Popular</div>
             {/* Precio */}
-            <div className="text-xs font-extrabold text-[var(--color-primary)]">
+            <div className="font-extrabold text-[var(--color-primary)]">
               {new Intl.NumberFormat("es-CL", {
                 style: "currency",
                 currency: "CLP",
@@ -105,18 +105,21 @@ export default function Products({
               }).format(product.price)}
             </div>
           </div>
-          <div className="flex flex-row gap-2 ml-auto">
+          <div className="flex flex-col gap-2 ml-auto items-center justify-between h-14">
+            <button
+              className="items-center rounded-full p-1 bg-[var(--color-primary)] shrink-0"
+              aria-label="Añadir a la orden"
+            >
+              <ShoppingBasket color="white" size={16} />
+            </button>
             <button
               onClick={() => {
                 openModal("viewProduct", product.id);
               }}
-              className="place-items-center"
+              className="order-last"
               aria-label="Más información"
             >
               <Info color="#EA2831" size={20} />
-            </button>
-            <button className="items-center rounded p-1 bg-[var(--color-primary)]" aria-label="Añadir a la orden">
-              <ShoppingCart color="white" size={20} />
             </button>
           </div>
         </div>
