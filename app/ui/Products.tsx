@@ -37,7 +37,7 @@ export default function Products({
     <div className="flex flex-col gap-y-2 pb-5">
       <div className={`${highlights.length ? "" : "pt-20"} p-2 text-lg text-[var(--color-foreground)] mb-2`}>
         {highlights.length ? (
-          <section className="pt-25">
+          <section className="pt-22">
             <h1 className="pb-3 font-bold">Destacados</h1>
 
             {/* Carrusel 1-por-scroll con Tailwind + Scroll Snap */}
@@ -45,9 +45,12 @@ export default function Products({
               className="overflow-x-auto snap-x snap-mandatory scroll-smooth w-full scrollbar-hide"
               style={{ WebkitOverflowScrolling: "touch" }}
             >
-              <div className="flex">
+              <div className="flex gap-4 pr-6">
                 {highlights.map((highlight) => (
-                  <article key={highlight.id} className="snap-center snap-always shrink-0 basis-full w-full px-2">
+                  <article
+                    key={highlight.id}
+                    className="snap-start snap-always shrink-0 basis-[90%] sm:basis-[70%] w-full"
+                  >
                     {highlight.image_url ? (
                       <Image
                         src={highlight.image_url}
@@ -63,7 +66,7 @@ export default function Products({
                         Sin foto
                       </div>
                     )}
-                    <p className="mt-2 text-sm text-[var(--color-category)]">{highlight.description}</p>
+                    <p className="mt-2 text-sm font-semibold text-[var(--color-category)]">{highlight.description}</p>
                   </article>
                 ))}
               </div>
