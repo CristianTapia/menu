@@ -35,17 +35,17 @@ export default function Products({
   const selectedProduct = products.find((p) => p.id === selectedProductId);
   return (
     <div className="flex flex-col gap-y-2 pb-5">
-      <div className={`${highlights.length ? "" : "pt-20"} p-2 text-lg text-[var(--color-foreground)] mb-2`}>
+      <div className={`${highlights.length ? "" : "mt-20"} p-2 text-lg text-[var(--color-foreground)] mb-2`}>
         {highlights.length ? (
-          <section className="pt-22">
+          <section className="mt-20">
             <h1 className="pb-3 font-bold">Destacados</h1>
 
-            {/* Carrusel 1-por-scroll con Tailwind + Scroll Snap */}
+            {/* Carrusel con scroll snap */}
             <div
               className="overflow-x-auto snap-x snap-mandatory scroll-smooth w-full scrollbar-hide"
               style={{ WebkitOverflowScrolling: "touch" }}
             >
-              <div className="flex gap-4 pr-6">
+              <div className="flex gap-4 pr-6 rounded-xl">
                 {highlights.map((highlight) => (
                   <article
                     key={highlight.id}
@@ -97,8 +97,6 @@ export default function Products({
             <div className="font-semibold line-clamp-2">{product.name}</div>
             {/* Descripción */}
             <div className="text-[var(--color-dish)] line-clamp-3">{product.description}</div>
-            {/* Info extra */}
-            <div className="text-[var(--color-dish)]">Popular</div>
             {/* Precio */}
             <div className="font-extrabold text-[var(--color-primary)]">
               {new Intl.NumberFormat("es-CL", {
