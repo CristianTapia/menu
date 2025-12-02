@@ -34,46 +34,44 @@ export default function Products({
 
   const selectedProduct = products.find((p) => p.id === selectedProductId);
   return (
-    <div className="flex flex-col gap-y-2 pb-5">
-      <div className={`${highlights.length ? "" : "mt-20"} p-2 text-lg text-[var(--color-foreground)] mb-2`}>
-        {highlights.length ? (
-          <section className="mt-20">
-            <h1 className="pb-3 font-bold">Destacados</h1>
+    <div className="flex flex-col gap-y-2 mb-5">
+      {highlights.length ? (
+        <section className="px-2 text-lg text-[var(--color-foreground)]">
+          <h1 className="pb-3 font-bold">Destacados</h1>
 
-            {/* Carrusel con scroll snap */}
-            <div
-              className="overflow-x-auto snap-x snap-mandatory scroll-smooth w-full scrollbar-hide"
-              style={{ WebkitOverflowScrolling: "touch" }}
-            >
-              <div className="flex gap-4 pr-6 rounded-xl">
-                {highlights.map((highlight) => (
-                  <article
-                    key={highlight.id}
-                    className="snap-start snap-always shrink-0 basis-[90%] sm:basis-[70%] w-full"
-                  >
-                    {highlight.image_url ? (
-                      <Image
-                        src={highlight.image_url}
-                        alt={highlight.id.toString()}
-                        width={1200}
-                        height={800}
-                        unoptimized
-                        loading="lazy"
-                        className="w-full h-40 sm:h-56 object-cover rounded-xl"
-                      />
-                    ) : (
-                      <div className="w-full h-40 sm:h-56 border rounded-xl border-gray-300 grid place-items-center text-xs">
-                        Sin foto
-                      </div>
-                    )}
-                    <p className="mt-2 text-sm font-semibold text-[var(--color-category)]">{highlight.description}</p>
-                  </article>
-                ))}
-              </div>
+          {/* Carrusel con scroll snap */}
+          <div
+            className="overflow-x-auto snap-x snap-mandatory scroll-smooth w-full scrollbar-hide"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
+            <div className="flex gap-4 pr-6 rounded-xl">
+              {highlights.map((highlight) => (
+                <article
+                  key={highlight.id}
+                  className="snap-start snap-always shrink-0 basis-[90%] sm:basis-[70%] w-full"
+                >
+                  {highlight.image_url ? (
+                    <Image
+                      src={highlight.image_url}
+                      alt={highlight.id.toString()}
+                      width={1200}
+                      height={800}
+                      unoptimized
+                      loading="lazy"
+                      className="w-full h-40 sm:h-56 object-cover rounded-xl"
+                    />
+                  ) : (
+                    <div className="w-full h-40 sm:h-56 border rounded-xl border-gray-300 grid place-items-center text-xs">
+                      Sin foto
+                    </div>
+                  )}
+                  <p className="mt-2 text-sm font-semibold text-[var(--color-category)]">{highlight.description}</p>
+                </article>
+              ))}
             </div>
-          </section>
-        ) : null}
-      </div>
+          </div>
+        </section>
+      ) : null}
 
       {sortedProducts.map((product) => (
         <div key={product.id} className="p-2 flex flex-row gap-2 items-start">
