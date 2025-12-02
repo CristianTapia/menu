@@ -13,55 +13,45 @@ export default function Categories({
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  function handleCategoryClick(id: number | null) {
+  function handleCategoryClick(id: number | null, btn?: HTMLButtonElement | null) {
     setActiveCategory(id);
     onCategorySelectionAction(id);
 
-    if (id !== null && scrollRef.current) {
-      const btn = scrollRef.current.querySelector<HTMLButtonElement>(`[data-name="${id}"]`);
-      if (btn) {
-        btn.scrollIntoView({ behavior: "smooth", inline: "start" });
-      }
-    } else {
-      // si es "Todas", volvemos al inicio
-      scrollRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+    if (btn && id !== null) {
+      btn.scrollIntoView({ behavior: "smooth", inline: "start" });
+    } else if (scrollRef.current && id === null) {
+      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
     }
   }
 
   return (
     <div className="flex items-center w-full font-bold">
       {/* scroll-snap en el contenedor desplazable */}
-      <div ref={scrollRef} className="flex-1 overflow-x-auto no-scrollbar">
+      <div ref={scrollRef} className="flex-1 overflow-x-auto no-scrollbar snap-x snap-mandatory">
         <div className="flex items-center">
           <button
             onClick={() => handleCategoryClick(null)}
-            className={`
-          flex-none whitespace-nowrap px-2 py-2
-          ${
-            activeCategory === null
-              ? "underline underline-offset-10 decoration-2 decoration-[var(--color-primary)] text-[var(--color-primary)]"
-              : "text-[var(--color-category)]"
-          }
-        `}
+            className={`flex-none snap-start whitespace-nowrap p-2 ${
+              activeCategory === null
+                ? "underline underline-offset-10 decoration-2 decoration-[var(--color-primary)] text-[var(--color-primary)]"
+                : "text-[var(--color-category)]"
+            }
+            `}
           >
             Todas
           </button>
-          {categories.map((opt) => (
+          {categories.map((category) => (
             <button
-              key={opt.id}
-              data-id={opt.id}
-              onClick={() => handleCategoryClick(opt.id)}
-              className={`
-                scroll-snap-start
-                px-2 py-2 whitespace-nowrap
-                ${
-                  activeCategory === opt.id
-                    ? "underline underline-offset-10 decoration-2 decoration-[var(--color-primary)] text-[var(--color-primary)]"
-                    : "text-[var(--color-category)]"
-                }
+              key={category.id}
+              onClick={(e) => handleCategoryClick(category.id, e.currentTarget)}
+              className={`snap-start whitespace-nowrap p-2 ${
+                activeCategory === category.id
+                  ? "underline underline-offset-10 decoration-2 decoration-[var(--color-primary)] text-[var(--color-primary)]"
+                  : "text-[var(--color-category)]"
+              }
               `}
             >
-              {opt.name}
+              {category.name}
             </button>
           ))}
         </div>
