@@ -25,7 +25,7 @@ export default function Categories({
   }
 
   return (
-    <div className="flex items-center w-full font-bold">
+    <div className="flex items-center w-full font-bold text-sm">
       {/* scroll-snap en el contenedor desplazable */}
       <div ref={scrollRef} className="flex-1 overflow-x-auto no-scrollbar snap-x snap-mandatory">
         <div className="flex items-center">

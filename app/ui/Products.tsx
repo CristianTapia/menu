@@ -36,7 +36,7 @@ export default function Products({
   return (
     <div className="flex flex-col gap-y-2 mb-5">
       {highlights.length ? (
-        <section className="pb-2 text-lg text-[var(--color-foreground)]">
+        <section className="pb-2 text-[var(--color-foreground)]">
           <h1 className="pb-3 font-bold">Destacados</h1>
 
           {/* Carrusel con scroll snap */}
@@ -58,10 +58,10 @@ export default function Products({
                       height={800}
                       unoptimized
                       loading="lazy"
-                      className="w-full h-40 sm:h-56 object-cover rounded-xl"
+                      className="h-32 w-full sm:h-56 object-cover rounded-xl"
                     />
                   ) : (
-                    <div className="w-full h-40 sm:h-56 border rounded-xl border-gray-300 grid place-items-center text-xs">
+                    <div className="h-32 w-full sm:h-56 border rounded-xl border-gray-300 grid place-items-center text-xs">
                       Sin foto
                     </div>
                   )}

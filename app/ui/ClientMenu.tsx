@@ -21,7 +21,7 @@ export default function ClientMenu({
   return (
     <div className="flex flex-col bg-[var(--color-background)]">
       <header className="fixed inset-x-0 top-0 overflow-x-auto p-3 text-[var(--color-foreground)] bg-[rgb(var(--color-background-rgb)/0.92)] ">
-        <div className="items-center text-center text-lg font-bold p-2">Menú</div>
+        <div className="items-center text-center font-bold p-2">Menú</div>
         <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </header>
       <main className="pb-[calc(4rem+env(safe-area-inset-bottom))] overflow-y-auto p-4 bg-[var(--color-background)] mt-25">
