@@ -4,7 +4,7 @@ import Modal from "./Modals/Modal";
 import { useState } from "react";
 import Image from "next/image";
 import { Product, Highlight } from "@/lib/types";
-import { Info, ShoppingBasket } from "lucide-react";
+import { BookOpenText, Info, ShoppingBasket } from "lucide-react";
 
 export default function Products({
   products,
@@ -127,29 +127,19 @@ export default function Products({
       {/* Modal único fuera del map */}
       <Modal
         isOpen={activeModal === "viewProduct"}
+        icon={<BookOpenText color="#EA2831" />}
+        iconBgOptionalClassName="bg-[var(--color-bg-selected)]"
         onCloseAction={closeModal}
         title={selectedProduct?.name ?? "Producto"}
         body={
           selectedProduct ? (
-            <div className="flex flex-col gap-2 text-sm text-gray-800">
-              <div>
-                <strong>Categoría:</strong> {selectedProduct.category.name}
-              </div>
-              <div>
-                <strong>Precio:</strong>{" "}
-                {new Intl.NumberFormat("es-CL", {
-                  style: "currency",
-                  currency: "CLP",
-                  minimumFractionDigits: 0,
-                }).format(selectedProduct.price)}
-              </div>
-              <div>
-                <strong>Descripción:</strong> {selectedProduct.description ?? "Sin descripción"}
-              </div>
+            <div className="flex flex-col gap-2 text-gray-800">
+              <p className="text-sm">{selectedProduct.description ?? "Sin descripción"}</p>
             </div>
           ) : null
         }
         buttonAName="Cerrar"
+        buttonAOptionalClassName="bg-[var(--color-cancel)]"
         onButtonAClickAction={closeModal}
       />
     </div>

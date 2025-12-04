@@ -1,23 +1,39 @@
 "use client";
 
+import { X } from "lucide-react";
+
+const baseClassNameButton = "flex px-4 p-3 gap-2 rounded-xl cursor-pointer";
+
 export default function Modal({
   isOpen,
+  icon,
+  iconBgOptionalClassName,
   onCloseAction,
   title,
   body,
   fixedBody,
   buttonAName,
+  buttonAIcon,
+  buttonAOptionalClassName,
   onButtonAClickAction,
   buttonBName,
+  buttonBIcon,
+  buttonBOptionalClassName,
   onButtonBClickAction,
 }: {
   isOpen: boolean;
+  icon?: React.ReactNode;
+  iconBgOptionalClassName?: string;
   onCloseAction: () => void;
   title?: string;
   body?: React.ReactNode;
   fixedBody?: React.ReactNode;
   buttonAName?: string;
   buttonBName?: string;
+  buttonAIcon?: React.ReactNode;
+  buttonBIcon?: React.ReactNode;
+  buttonAOptionalClassName?: string;
+  buttonBOptionalClassName?: string;
   onButtonAClickAction?: () => void;
   onButtonBClickAction?: () => void;
 }) {
@@ -26,42 +42,96 @@ export default function Modal({
       {isOpen && (
         // Cierra el modal al hacer clic fuera
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black/60 transition-opacity"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 transition-opacity text-sm"
           onClick={onCloseAction}
         >
           {/* Evita que el click dentro del modal lo cierre */}
-          <div className="bg-white p-6 rounded-lg w-96" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white p-6 rounded-lg w-auto mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
             {/* Modal header */}
-            <div className="flex pl-4 pb-6 justify-between text-xl">
-              <h2 className="text-gray-900">{title}</h2>
-              <button className="pr-4 text-gray-900 cursor-pointer" onClick={onCloseAction}>
-                X
+            <div className="flex justify-end mb-2">
+              <button className=" text-gray-900 cursor-pointer" onClick={onCloseAction}>
+                <X size={24} />
               </button>
             </div>
-            {/* Modal body scrolleable*/}
-            <div className="p-4 max-h-[70vh] overflow-y-auto">{body}</div>
-            {/* Model Body fijo */}
-            <div className="p-4">{fixedBody}</div>
-            {/* Modal footer */}
-            <div className="pt-4 pl-4">
-              {buttonAName && (
-                <button onClick={onButtonAClickAction} className="p-2 bg-green-400 text-white rounded cursor-pointer">
-                  {buttonAName}
-                </button>
-              )}
 
-              {buttonBName && (
-                <button
-                  onClick={onButtonBClickAction}
-                  className="p-2 bg-red-600 text-white rounded ml-2 cursor-pointer"
-                >
-                  {buttonBName}
-                </button>
-              )}
+            <div className="flex justify-center">
+              <div className={`${iconBgOptionalClassName} rounded-full p-3`}>{icon}</div>
             </div>
+            <div className="flex p-4 justify-center items-center gap-4 border-b border-[var(--color-border-box)]">
+              <h1 className="text-md font-bold">{title}</h1>
+            </div>
+            {/* Modal body scrolleable*/}
+            {body ? <div className="p-4 max-h-[70vh] overflow-y-auto">{body}</div> : null}
+
+            {/* Model Body fijo */}
+            {fixedBody ? <div className="px-4">{fixedBody}</div> : null}
+
+            {/* Modal footer buttons*/}
+            {buttonAName || buttonBName ? (
+              <div className="flex gap-4 px-4 text-sm font-bold justify-center">
+                {buttonAName ? (
+                  <button
+                    onClick={onButtonAClickAction}
+                    className={`${baseClassNameButton} ${buttonAOptionalClassName ?? ""}`}
+                  >
+                    {buttonAIcon} {buttonAName}
+                  </button>
+                ) : null}
+
+                {buttonBName ? (
+                  <button
+                    onClick={onButtonBClickAction}
+                    className={`${baseClassNameButton} ${buttonBOptionalClassName ?? ""}`}
+                  >
+                    {buttonBIcon} {buttonBName}
+                  </button>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
       )}
     </>
+    // <>
+    //   {isOpen && (
+    //     // Cierra el modal al hacer clic fuera
+    //     <div
+    //       className="fixed inset-0 flex items-center justify-center bg-black/60 transition-opacity"
+    //       onClick={onCloseAction}
+    //     >
+    //       {/* Evita que el click dentro del modal lo cierre */}
+    //       <div className="bg-white p-6 rounded-lg w-96" onClick={(e) => e.stopPropagation()}>
+    //         {/* Modal header */}
+    //         <div className="flex pl-4 pb-6 justify-between text-xl">
+    //           <h2 className="text-gray-900">{title}</h2>
+    //           <button className="pr-4 text-gray-900 cursor-pointer" onClick={onCloseAction}>
+    //             X
+    //           </button>
+    //         </div>
+    //         {/* Modal body scrolleable*/}
+    //         <div className="p-4 max-h-[70vh] overflow-y-auto">{body}</div>
+    //         {/* Model Body fijo */}
+    //         <div className="p-4">{fixedBody}</div>
+    //         {/* Modal footer */}
+    //         <div className="pt-4 pl-4">
+    //           {buttonAName && (
+    //             <button onClick={onButtonAClickAction} className="p-2 bg-green-400 text-white rounded cursor-pointer">
+    //               {buttonAName}
+    //             </button>
+    //           )}
+
+    //           {buttonBName && (
+    //             <button
+    //               onClick={onButtonBClickAction}
+    //               className="p-2 bg-red-600 text-white rounded ml-2 cursor-pointer"
+    //             >
+    //               {buttonBName}
+    //             </button>
+    //           )}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   )}
+    // </>
   );
 }
