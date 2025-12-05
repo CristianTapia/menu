@@ -4,8 +4,9 @@ import { useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
 import ShareLocationButton from "./ShareLocationButton";
+import OffCanvas from "./OffCanvas";
 import { Product, Category, Highlight } from "@/lib/types";
-import { ReceiptText, MapPin } from "lucide-react";
+import { ReceiptText } from "lucide-react";
 
 export default function ClientMenu({
   products,
@@ -17,6 +18,7 @@ export default function ClientMenu({
   highlights: Highlight[];
 }) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
 
   return (
     <div className="flex flex-col bg-[var(--color-background)]">
@@ -29,10 +31,15 @@ export default function ClientMenu({
       </main>
       <footer className="fixed inset-x-0 bottom-0 border-t border-[var(--color-primary)] bg-[rgb(var(--color-background-rgb)/0.95)] text-center py-4">
         <div className="max-w-4xl mx-auto h-full grid grid-cols-2 gap-4">
-          <div aria-label="Comanda" className="flex flex-col items-center">
+          <button
+            type="button"
+            aria-label="Comanda"
+            onClick={() => setIsOffCanvasOpen(true)}
+            className="flex flex-col items-center"
+          >
             <ReceiptText color="#21111199" className="h-6 w-6" aria-label="Producto añadido" />
             <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
-          </div>
+          </button>
           <div aria-label="Ubicación" className="flex flex-col items-center">
             <ShareLocationButton
               name="Local de Comidas"
@@ -43,6 +50,9 @@ export default function ClientMenu({
           </div>
         </div>
       </footer>
+      <OffCanvas grandTotal={0} isOpen={isOffCanvasOpen} onCloseAction={() => setIsOffCanvasOpen(false)}>
+        <div className="p-4 text-sm text-[var(--color-foreground)]">Tu comanda está vacía.</div>
+      </OffCanvas>
     </div>
   );
 }
