@@ -1,5 +1,7 @@
 "use client";
 
+import { X } from "lucide-react";
+
 export default function OffCanvas({
   grandTotal,
   isOpen,
@@ -12,21 +14,21 @@ export default function OffCanvas({
   children: React.ReactNode; // Acepta contenido dinámico (productos seleccionados)
 }) {
   return (
-    <>
+    <div>
       {/* Overlay - Cierra el menú si se hace clic afuera */}
-      {isOpen && <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={onCloseAction} />}
+      {isOpen && <div className="fixed inset-0 bg-black/60 transition-opacity" onClick={onCloseAction} />}
 
       {/* Menú Off-Canvas */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${
+        className={`fixed top-0 left-0 h-full w-64 bg-[var(--color-background)] shadow-lg transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 flex flex-col`}
       >
         {/* Cabecera fija */}
-        <div className="p-4 flex justify-between border-b">
-          <h2 className="text-red-600 text-lg font-semibold">Comanda</h2>
-          <button onClick={onCloseAction} className="text-red-600">
-            ✕
+        <div className="p-4 flex justify-between border-b border-[var(--color-border-box)]">
+          <h2 className="text-lg font-bold">Mi Pedido</h2>
+          <button onClick={onCloseAction} className="text-[var(--color-category)]">
+            <X size={24} />
           </button>
         </div>
 
@@ -39,6 +41,6 @@ export default function OffCanvas({
           <button className="bg-black p-4 ml-auto">Pedir</button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
