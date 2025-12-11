@@ -43,10 +43,12 @@ export default function OffCanvas({
         <div className="flex-1 overflow-y-auto p-2">{children}</div>
 
         {/* Footer para ordenar */}
-        <div className="flex p-4 items-center justify-center">
-          <div className="text-red-800">Total: {formattedTotal}</div>
-          <button className="bg-black p-4 ml-auto">Pedir</button>
-        </div>
+        <footer className="flex justify-between border-t border-gray-200 bg-background-light p-6 dark:border-gray-700 dark:bg-background-dark">
+          {/* <div className="flex justify-between items-center mb-4"> */}
+          <span className="text-lg font-semibold text-background-dark dark:text-background-light">Total</span>
+          <span className="text-xl font-bold text-[var(--color-primary)]">{formattedTotal}</span>
+          {/* </div> */}
+        </footer>
       </div>
     </div>
   );
