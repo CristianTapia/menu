@@ -10,10 +10,12 @@ export default function Products({
   products,
   highlights,
   selectedCategory,
+  onAddToCart,
 }: {
   products: Product[];
   highlights: Highlight[];
   selectedCategory: number | null;
+  onAddToCart: (product: Product) => void;
 }) {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [activeModal, setActiveModal] = useState<null | "viewProduct">(null);
@@ -93,7 +95,7 @@ export default function Products({
           <div className="flex flex-col gap-2 items-start flex-1 min-w-0 text-xs">
             {/* Nombre */}
             <div className="font-semibold line-clamp-2">{product.name}</div>
-            {/* Descripción */}
+            {/* Descripcion */}
             <div className="text-[var(--color-dish)] line-clamp-3">{product.description}</div>
             {/* Precio */}
             <div className="font-extrabold text-[var(--color-primary)]">
@@ -107,7 +109,8 @@ export default function Products({
           <div className="flex flex-col gap-2 ml-auto items-center justify-between h-14">
             <button
               className="items-center rounded-full p-1 bg-[var(--color-primary)] shrink-0"
-              aria-label="Añadir a la orden"
+              aria-label="Agregar a la orden"
+              onClick={() => onAddToCart(product)}
             >
               <ShoppingBasket color="white" size={16} />
             </button>
@@ -116,7 +119,7 @@ export default function Products({
                 openModal("viewProduct", product.id);
               }}
               className="order-last"
-              aria-label="Más información"
+              aria-label="Mas informacion"
             >
               <Info color="#EA2831" size={20} />
             </button>
@@ -124,7 +127,7 @@ export default function Products({
         </div>
       ))}
 
-      {/* Modal único fuera del map */}
+      {/* Modal unico fuera del map */}
       <Modal
         isOpen={activeModal === "viewProduct"}
         icon={<BookOpenText color="#EA2831" />}
@@ -134,7 +137,7 @@ export default function Products({
         body={
           selectedProduct ? (
             <div className="flex flex-col gap-2 text-gray-800">
-              <p className="text-sm">{selectedProduct.description ?? "Sin descripción"}</p>
+              <p className="text-sm">{selectedProduct.description ?? "Sin descripcion"}</p>
             </div>
           ) : null
         }
