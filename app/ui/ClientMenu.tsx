@@ -23,21 +23,17 @@ export default function ClientMenu({
 
   const grandTotal = useMemo(
     () => cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
-    [cartItems],
+    [cartItems]
   );
 
   const formatCLP = (value: number) =>
-    new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 }).format(
-      value,
-    );
+    new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 }).format(value);
 
   const handleAddToCart = (product: Product) => {
     setCartItems((prev) => {
       const exists = prev.find((item) => item.product.id === product.id);
       if (exists) {
-        return prev.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
-        );
+        return prev.map((item) => (item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
       }
       return [...prev, { product, quantity: 1 }];
     });
@@ -83,12 +79,9 @@ export default function ClientMenu({
         {cartItems.length === 0 ? (
           <div className="p-4 text-sm text-[var(--color-foreground)]">Tu comanda esta vacia</div>
         ) : (
-          <div className="p-3 flex flex-col gap-3 text-sm text-[var(--color-foreground)]">
+          <div className="p-2 flex flex-col gap-3 text-sm text-[var(--color-foreground)]">
             {cartItems.map((item) => (
-              <div
-                key={item.product.id}
-                className="flex items-start gap-3 border-b border-[var(--color-border-box)] pb-3 last:border-none last:pb-0"
-              >
+              <div key={item.product.id} className="flex items-center gap-3 pb-3 last:pb-0">
                 {item.product.image_url ? (
                   <div className="w-12 h-12 overflow-hidden rounded-lg border border-[var(--color-border-box)]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -101,12 +94,14 @@ export default function ClientMenu({
                 )}
                 <div className="flex flex-col gap-1 flex-1 min-w-0">
                   <div className="font-semibold line-clamp-2">{item.product.name}</div>
-                  <div className="text-[var(--color-dish)]">
-                    {item.quantity} x {formatCLP(item.product.price)}
+                  <div className="text-[var(--color-dish)] text-xs">
+                    {formatCLP(item.product.price * item.quantity)}
                   </div>
                 </div>
-                <div className="font-bold text-[var(--color-primary)]">
-                  {formatCLP(item.product.price * item.quantity)}
+                <div className="flex font-bold items-center justify-center gap-3 rounded-full border border-gray-200 px-3 py-1 dark:border-gray-700">
+                  <button className="text-[var(--color-primary)]">-</button>
+                  <span className="font-medium text-background-dark dark:text-background-light">{item.quantity}</span>
+                  <button className="text-[var(--color-primary)]">+</button>
                 </div>
               </div>
             ))}
