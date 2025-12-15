@@ -40,6 +40,14 @@ export default function ClientMenu({
     setIsOffCanvasOpen(true);
   };
 
+  const handleRemoveFromCart = (product: Product) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) => (item.product.id === product.id ? { ...item, quantity: item.quantity - 1 } : item))
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
   return (
     <div className="flex flex-col bg-[var(--color-background)]">
       <header className="fixed inset-x-0 top-0 overflow-x-auto p-3 text-[var(--color-foreground)] bg-[rgb(var(--color-background-rgb)/0.92)] ">
@@ -84,7 +92,6 @@ export default function ClientMenu({
               <div key={item.product.id} className="flex items-center gap-3 pb-3 last:pb-0">
                 {item.product.image_url ? (
                   <div className="w-12 h-12 overflow-hidden rounded-lg border border-[var(--color-border-box)]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={item.product.image_url} alt={item.product.name} className="w-full h-full object-cover" />
                   </div>
                 ) : (
@@ -99,9 +106,13 @@ export default function ClientMenu({
                   </div>
                 </div>
                 <div className="flex font-bold items-center justify-center gap-3 rounded-full border border-gray-200 px-3 py-1 dark:border-gray-700">
-                  <button className="text-[var(--color-primary)]">-</button>
+                  <button onClick={() => handleRemoveFromCart(item.product)} className="text-[var(--color-primary)]">
+                    -
+                  </button>
                   <span className="font-medium text-background-dark dark:text-background-light">{item.quantity}</span>
-                  <button className="text-[var(--color-primary)]">+</button>
+                  <button onClick={() => handleAddToCart(item.product)} className="text-[var(--color-primary)]">
+                    +
+                  </button>
                 </div>
               </div>
             ))}
