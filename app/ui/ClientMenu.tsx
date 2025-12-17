@@ -6,7 +6,7 @@ import Products from "./Products";
 import ShareLocationButton from "./ShareLocationButton";
 import OffCanvas from "./OffCanvas";
 import { Product, Category, Highlight } from "@/lib/types";
-import { ReceiptText } from "lucide-react";
+import { ReceiptText, Plus, Minus } from "lucide-react";
 
 export default function ClientMenu({
   products,
@@ -71,7 +71,7 @@ export default function ClientMenu({
             className="flex flex-col items-center"
           >
             <ReceiptText color="#21111199" className="h-6 w-6" aria-label="Producto agregado" />
-            <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">Que pedimos?</span>
+            <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
           </button>
           <div aria-label="Ubicacion" className="flex flex-col items-center">
             <ShareLocationButton
@@ -107,11 +107,13 @@ export default function ClientMenu({
                 </div>
                 <div className="flex font-bold items-center justify-center gap-3 rounded-full border border-gray-200 px-3 py-1 dark:border-gray-700">
                   <button onClick={() => handleRemoveFromCart(item.product)} className="text-[var(--color-primary)]">
-                    -
+                    <Minus size={14} />
                   </button>
-                  <span className="font-medium text-background-dark dark:text-background-light">{item.quantity}</span>
+                  <span className="w-3 text-center font-medium text-background-dark dark:text-background-light">
+                    {item.quantity}
+                  </span>
                   <button onClick={() => handleAddToCart(item.product)} className="text-[var(--color-primary)]">
-                    +
+                    <Plus size={14} />
                   </button>
                 </div>
               </div>

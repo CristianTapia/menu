@@ -33,7 +33,7 @@ export default function OffCanvas({
       >
         {/* Cabecera fija */}
         <div className="p-4 flex justify-between border-b border-[var(--color-border-box)]">
-          <h2 className="text-md font-bold">Mi Pedido</h2>
+          <h2 className="text-md font-bold">Resumen</h2>
           <button onClick={onCloseAction} className="text-[var(--color-category)]">
             <X size={24} />
           </button>
