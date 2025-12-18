@@ -4,21 +4,33 @@ import { type ReactNode } from "react";
 import { X } from "lucide-react";
 
 export default function OffCanvas({
-  grandTotal,
+  subTotal,
   isOpen,
   onCloseAction,
   children,
 }: {
-  grandTotal: number;
+  subTotal: number;
   isOpen: boolean;
   onCloseAction: () => void;
   children: ReactNode; // Acepta contenido dinamico (productos seleccionados)
 }) {
-  const formattedTotal = new Intl.NumberFormat("es-CL", {
+  const formattedSubTotal = new Intl.NumberFormat("es-CL", {
     style: "currency",
     currency: "CLP",
     minimumFractionDigits: 0,
-  }).format(grandTotal);
+  }).format(subTotal);
+
+  const formattedTip = new Intl.NumberFormat("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    minimumFractionDigits: 0,
+  }).format(subTotal * 0.1);
+
+  const formattedGrandTotal = new Intl.NumberFormat("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    minimumFractionDigits: 0,
+  }).format(subTotal + subTotal * 0.1);
 
   return (
     <div>
@@ -43,11 +55,19 @@ export default function OffCanvas({
         <div className="flex-1 overflow-y-auto p-2">{children}</div>
 
         {/* Footer para ordenar */}
-        <footer className="flex justify-between border-t border-gray-200 bg-background-light p-6 dark:border-gray-700 dark:bg-background-dark">
-          {/* <div className="flex justify-between items-center mb-4"> */}
-          <span className="text-lg font-semibold text-background-dark dark:text-background-light">Total</span>
-          <span className="text-xl font-bold text-[var(--color-primary)]">{formattedTotal}</span>
-          {/* </div> */}
+        <footer className="flex flex-col gap-3 text-sm justify-between border-t border-gray-200 bg-background-light px-3 py-6 dark:border-gray-700 dark:bg-background-dark">
+          <div className="flex justify-between">
+            <p className="text-zinc-600 dark:text-zinc-400">Subtotal</p>
+            <p>{formattedSubTotal}</p>
+          </div>
+          <div className="flex justify-between">
+            <p className="text-zinc-600 dark:text-zinc-400">Propina sugerida (10%)</p>
+            <p>{formattedTip}</p>
+          </div>
+          <div className="flex justify-between font-bold">
+            <p className="font-semibold text-background-dark dark:text-background-light">Total</p>
+            <p className="font-bold text-[var(--color-primary)]">{formattedGrandTotal}</p>
+          </div>
         </footer>
       </div>
     </div>

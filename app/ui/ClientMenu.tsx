@@ -21,7 +21,7 @@ export default function ClientMenu({
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
   const [cartItems, setCartItems] = useState<{ product: Product; quantity: number }[]>([]);
 
-  const grandTotal = useMemo(
+  const subTotal = useMemo(
     () => cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
     [cartItems]
   );
@@ -83,7 +83,7 @@ export default function ClientMenu({
           </div>
         </div>
       </footer>
-      <OffCanvas grandTotal={grandTotal} isOpen={isOffCanvasOpen} onCloseAction={() => setIsOffCanvasOpen(false)}>
+      <OffCanvas subTotal={subTotal} isOpen={isOffCanvasOpen} onCloseAction={() => setIsOffCanvasOpen(false)}>
         {cartItems.length === 0 ? (
           <div className="p-4 text-sm text-[var(--color-foreground)]">Tu comanda esta vacia</div>
         ) : (
