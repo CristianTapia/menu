@@ -105,6 +105,7 @@ export default function ClientMenu({
                     {formatCLP(item.product.price * item.quantity)}
                   </div>
                 </div>
+                {/* Botones de cantidad */}
                 <div className="flex font-bold items-center justify-center gap-3 rounded-full border border-gray-200 px-3 py-1 dark:border-gray-700">
                   <button onClick={() => handleRemoveFromCart(item.product)} className="text-[var(--color-primary)]">
                     <Minus size={14} />
