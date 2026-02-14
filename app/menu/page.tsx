@@ -16,6 +16,7 @@ export default async function Page() {
   if (!prodRes.ok) throw new Error("Error products");
   if (!highRes.ok) throw new Error("Error highlights");
 
+  // Fetch de datos y parseo a JSON
   const categories: Array<{ id: number; name: string }> = await catRes.json();
   const products: Product[] = await prodRes.json(); // debe incluir image_url
   const highlights: Highlight[] = await highRes.json(); // debe incluir image_url
