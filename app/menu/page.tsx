@@ -1,25 +1,20 @@
-// app/menu/page.tsx
-import ClientMenu from "../ui/ClientMenu";
-import { Product, Highlight } from "@/lib/types";
+import Link from "next/link";
 
-export default async function Page() {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001";
-
-  // TRAER CATEGORÍAS, PRODUCTOS Y DESTACADOS DESDE LA API
-  const [catRes, prodRes, highRes] = await Promise.all([
-    fetch(`${base}/api/categories`, { cache: "no-store" }),
-    fetch(`${base}/api/products`, { cache: "no-store" }),
-    fetch(`${base}/api/highlights`, { cache: "no-store" }),
-  ]);
-
-  if (!catRes.ok) throw new Error("Error categorías");
-  if (!prodRes.ok) throw new Error("Error products");
-  if (!highRes.ok) throw new Error("Error highlights");
-
-  // Fetch de datos y parseo a JSON
-  const categories: Array<{ id: number; name: string }> = await catRes.json();
-  const products: Product[] = await prodRes.json(); // debe incluir image_url
-  const highlights: Highlight[] = await highRes.json(); // debe incluir image_url
-
-  return <ClientMenu products={products} categories={categories} highlights={highlights} />;
+export default function MenuLandingPage() {
+  return (
+    <main className="min-h-screen grid place-items-center p-6">
+      <div className="max-w-lg w-full rounded-xl border border-slate-200 bg-white p-6 text-slate-900">
+        <h1 className="text-xl font-semibold mb-2">Menu publico</h1>
+        <p className="text-sm mb-4">
+          Debes abrir esta ruta con tenant, por ejemplo: <code>/menu/local-2</code>.
+        </p>
+        <p className="text-sm mb-4">
+          Si vienes desde QR, revisa que el codigo apunte a <code>/menu/&lt;tenant-domain&gt;</code>.
+        </p>
+        <Link href="/" className="inline-block text-sm font-medium text-blue-700 underline underline-offset-2">
+          Volver al inicio
+        </Link>
+      </div>
+    </main>
+  );
 }
