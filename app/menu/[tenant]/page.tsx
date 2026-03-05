@@ -9,25 +9,27 @@ type PublicMenuResponse = {
 
 export const dynamic = "force-dynamic";
 
-export default async function TenantMenuPage({ params }: { params: { tenant: string } }) {
+export default async function TenantMenuPage({ params }: { params: Promise<{ tenant: string }> }) {
   const dashboardBase = process.env.NEXT_PUBLIC_DASHBOARD_API_URL ?? "http://localhost:3001";
-  const tenant = decodeURIComponent(params.tenant);
+  const { tenant: tenantParam } = await params;
+  const tenant = decodeURIComponent(tenantParam);
 
-  const res = await fetch(`${dashboardBase}/api/public/menu/${encodeURIComponent(tenant)}`, {
-    cache: "no-store",
-  });
+  const [menuRes, categoriesRes, highlightsRes] = await Promise.all([
+    fetch(`${dashboardBase}/api/public/menu/${encodeURIComponent(tenant)}`, { cache: "no-store" }),
+    fetch(`${dashboardBase}/api/categories?tenant=${encodeURIComponent(tenant)}`, { cache: "no-store" }),
+    fetch(`${dashboardBase}/api/highlights?tenant=${encodeURIComponent(tenant)}&limit=20`, { cache: "no-store" }),
+  ]);
 
-  if (res.status === 404) notFound();
-  if (!res.ok) throw new Error("Error cargando menu publico");
+  if (menuRes.status === 404) notFound();
+  if (!menuRes.ok) throw new Error("Error cargando menu publico");
 
-  const data = (await res.json()) as PublicMenuResponse;
+  const data = (await menuRes.json()) as PublicMenuResponse;
   const products = data.products ?? [];
 
-  // Esta app no tiene aun endpoint publico de destacados por tenant.
-  const highlights: Highlight[] = [];
+  const highlights: Highlight[] = highlightsRes.ok ? (((await highlightsRes.json()) as Highlight[]) ?? []) : [];
 
-  // Las categorias se derivan desde los productos recibidos.
-  const categories: Category[] = Array.from(
+  const categoriesFromApi: Category[] = categoriesRes.ok ? (((await categoriesRes.json()) as Category[]) ?? []) : [];
+  const categoriesFromProducts: Category[] = Array.from(
     new Map(
       products
         .map((p) => p.category)
@@ -35,6 +37,7 @@ export default async function TenantMenuPage({ params }: { params: { tenant: str
         .map((c) => [c.id, c])
     ).values()
   );
+  const categories = categoriesFromApi.length > 0 ? categoriesFromApi : categoriesFromProducts;
 
   return <ClientMenu products={products} categories={categories} highlights={highlights} />;
 }
