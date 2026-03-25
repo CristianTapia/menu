@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
@@ -94,7 +95,14 @@ export default function ClientMenu({
               <div key={item.product.id} className="flex items-center gap-3 pb-3 last:pb-0">
                 {item.product.image_url ? (
                   <div className="w-12 h-12 overflow-hidden rounded-lg border border-[var(--color-border-box)]">
-                    <img src={item.product.image_url} alt={item.product.name} className="w-full h-full object-cover" />
+                    <Image
+                      src={item.product.image_url}
+                      alt={item.product.name}
+                      width={48}
+                      height={48}
+                      unoptimized
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 ) : (
                   <div className="w-12 h-12 rounded-lg border border-[var(--color-border-box)] grid place-items-center text-[10px]">

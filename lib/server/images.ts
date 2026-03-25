@@ -14,7 +14,7 @@ export async function getSignedMap(base: string, paths: string[], ttl = 3600): P
       if (!r.ok) return [p, null];
       const j = await r.json();
       return [p, j.url ?? null];
-    } catch (e) {
+    } catch {
       if (tries > 0) return fetchSigned(p, tries - 1);
       return [p, null];
     }
