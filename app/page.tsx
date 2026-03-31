@@ -9,6 +9,9 @@ export default function HomePage() {
         <p className="text-sm mb-6">
           Ejemplo: <code>/menu/local-demo</code>
         </p>
+        <p className="text-sm mb-6">
+          O bien una mesa puntual: <code>/m/mesa-demo-a1b2</code>
+        </p>
         <Link href="/menu" className="inline-block text-sm font-medium text-blue-700 underline underline-offset-2">
           Ir a ayuda de acceso
         </Link>

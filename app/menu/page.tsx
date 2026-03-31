@@ -11,6 +11,12 @@ export default function MenuLandingPage() {
         <p className="text-sm mb-4">
           Si vienes desde QR, revisa que el codigo apunte a <code>/menu/&lt;tenant-domain&gt;</code>.
         </p>
+        <p className="text-sm mb-4">
+          Para acceso por mesa, puedes usar una URL corta como <code>/m/&lt;table-token&gt;</code>.
+        </p>
+        <p className="text-sm mb-4">
+          Si prefieres incluir tenant y mesa en el QR: <code>/menu/&lt;tenant-domain&gt;/&lt;table-token&gt;</code>.
+        </p>
         <Link href="/" className="inline-block text-sm font-medium text-blue-700 underline underline-offset-2">
           Volver al inicio
         </Link>

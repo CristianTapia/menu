@@ -7,17 +7,19 @@ import Products from "./Products";
 import ShareLocationButton from "./ShareLocationButton";
 import OffCanvas from "./OffCanvas";
 import AutoRefresh from "./AutoRefresh";
-import { Product, Category, Highlight } from "@/lib/types";
+import { Product, Category, Highlight, MenuContext } from "@/lib/types";
 import { ReceiptText, Plus, Minus } from "lucide-react";
 
 export default function ClientMenu({
   products,
   categories,
   highlights,
+  context,
 }: {
   products: Product[];
   categories: Category[];
   highlights: Highlight[];
+  context?: MenuContext;
 }) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
@@ -54,7 +56,10 @@ export default function ClientMenu({
     <div className="flex flex-col bg-[var(--color-background)]">
       <AutoRefresh intervalMs={Number(process.env.NEXT_PUBLIC_MENU_AUTO_REFRESH_MS ?? 15000)} />
       <header className="fixed inset-x-0 top-0 overflow-x-auto p-3 text-[var(--color-foreground)] bg-[rgb(var(--color-background-rgb)/0.92)] ">
-        <div className="items-center text-center font-bold p-2">Menu</div>
+        <div className="items-center text-center font-bold p-2">
+          {context?.tenantName ? context.tenantName : "Menu"}
+          {context?.tableLabel ? <div className="text-xs font-medium opacity-70 mt-1">{context.tableLabel}</div> : null}
+        </div>
         <Categories categories={categories} onCategorySelectionAction={setSelectedCategory} />
       </header>
       <main className="pb-[calc(4rem+env(safe-area-inset-bottom))] overflow-y-auto p-4 bg-[var(--color-background)] mt-25">

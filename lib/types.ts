@@ -21,3 +21,9 @@ export type Highlight = {
   description: string;
   image_url?: string | null;
 };
+
+export type MenuContext = {
+  tenantName?: string | null;
+  tableLabel?: string | null;
+  tableToken?: string | null;
+};
