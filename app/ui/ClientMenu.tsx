@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Categories from "./Categories";
 import Products from "./Products";
 import ShareLocationButton from "./ShareLocationButton";
@@ -24,11 +24,57 @@ export default function ClientMenu({
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
   const [cartItems, setCartItems] = useState<{ product: Product; quantity: number }[]>([]);
+  const [hasLoadedCart, setHasLoadedCart] = useState(false);
+  const cartStorageKey = useMemo(() => {
+    const tenantScope = context?.tenantName?.trim() || "menu";
+    const tableScope = context?.tableToken?.trim() || "general";
+
+    return `menu-cart:${tenantScope}:${tableScope}`;
+  }, [context?.tableToken, context?.tenantName]);
 
   const subTotal = useMemo(
     () => cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
     [cartItems]
   );
+
+  useEffect(() => {
+    try {
+      const storedCart = window.localStorage.getItem(cartStorageKey);
+
+      if (!storedCart) {
+        setCartItems([]);
+        return;
+      }
+
+      const parsedCart = JSON.parse(storedCart) as { product: Product; quantity: number }[];
+
+      if (!Array.isArray(parsedCart)) {
+        setCartItems([]);
+        return;
+      }
+
+      setCartItems(
+        parsedCart.filter(
+          (item) =>
+            item &&
+            typeof item.quantity === "number" &&
+            item.quantity > 0 &&
+            item.product &&
+            typeof item.product.id === "number"
+        )
+      );
+    } catch {
+      setCartItems([]);
+    } finally {
+      setHasLoadedCart(true);
+    }
+  }, [cartStorageKey]);
+
+  useEffect(() => {
+    if (!hasLoadedCart) return;
+
+    window.localStorage.setItem(cartStorageKey, JSON.stringify(cartItems));
+  }, [cartItems, cartStorageKey, hasLoadedCart]);
 
   const formatCLP = (value: number) =>
     new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 }).format(value);
