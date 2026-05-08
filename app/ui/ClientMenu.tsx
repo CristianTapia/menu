@@ -36,6 +36,7 @@ export default function ClientMenu({
     () => cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
     [cartItems]
   );
+  const hasLocation = Boolean(context?.location);
 
   useEffect(() => {
     try {
@@ -117,7 +118,7 @@ export default function ClientMenu({
         />
       </main>
       <footer className="fixed inset-x-0 bottom-0 border-t border-[var(--color-primary)] bg-[rgb(var(--color-background-rgb)/0.95)] text-center py-4">
-        <div className="max-w-4xl mx-auto h-full grid grid-cols-2 gap-4">
+        <div className={`max-w-4xl mx-auto h-full grid gap-4 ${hasLocation ? "grid-cols-2" : "grid-cols-1"}`}>
           <button
             type="button"
             aria-label="Comanda"
@@ -127,14 +128,17 @@ export default function ClientMenu({
             <ReceiptText color="#21111199" className="h-6 w-6" aria-label="Producto agregado" />
             <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
           </button>
-          <div aria-label="Ubicacion" className="flex flex-col items-center">
-            <ShareLocationButton
-              name="Local de Comidas"
-              lat={-33.4489}
-              lng={-70.6693}
-              address="Av. Siempre Viva 123, Santiago"
-            />
-          </div>
+          {context?.location ? (
+            <div aria-label="Ubicacion" className="flex flex-col items-center">
+              <ShareLocationButton
+                name={context.location.name ?? context.tenantName ?? "Local"}
+                lat={context.location.lat}
+                lng={context.location.lng}
+                address={context.location.address}
+                mapsUrl={context.location.mapsUrl}
+              />
+            </div>
+          ) : null}
         </div>
       </footer>
       <OffCanvas subTotal={subTotal} isOpen={isOffCanvasOpen} onCloseAction={() => setIsOffCanvasOpen(false)}>

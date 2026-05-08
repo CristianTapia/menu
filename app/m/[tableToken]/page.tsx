@@ -24,6 +24,7 @@ export default async function PublicTableMenuPage({ params }: { params: Promise<
       highlights={data.highlights}
       context={{
         tenantName: table.tenant.name,
+        location: data.location,
         tableLabel: table.label,
         tableToken: table.token,
       }}

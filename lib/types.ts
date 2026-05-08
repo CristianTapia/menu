@@ -22,8 +22,17 @@ export type Highlight = {
   image_url?: string | null;
 };
 
+export type TenantLocation = {
+  name?: string | null;
+  address?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  mapsUrl?: string | null;
+};
+
 export type MenuContext = {
   tenantName?: string | null;
+  location?: TenantLocation | null;
   tableLabel?: string | null;
   tableToken?: string | null;
 };

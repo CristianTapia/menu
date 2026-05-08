@@ -1,4 +1,5 @@
 "use client";
+
 import { MapPin } from "lucide-react";
 
 export default function ShareLocationButton({
@@ -9,28 +10,35 @@ export default function ShareLocationButton({
   mapsUrl,
 }: {
   name: string;
-  lat: number;
-  lng: number;
-  address?: string;
-  mapsUrl?: string;
+  lat?: number | null;
+  lng?: number | null;
+  address?: string | null;
+  mapsUrl?: string | null;
 }) {
-  const directionsUrl = mapsUrl ?? `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-  const text = `Te espero en ${name}${address ? ` (${address})` : ""}. Cómo llegar: ${directionsUrl}`;
+  const destination = lat !== null && lat !== undefined && lng !== null && lng !== undefined ? `${lat},${lng}` : address;
+  const directionsUrl =
+    mapsUrl ??
+    (destination ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}` : null);
+  const shareText = `Te espero en ${name}${address ? ` (${address})` : ""}.`;
+  const whatsappText = directionsUrl ? `${shareText} Como llegar: ${directionsUrl}` : shareText;
+
+  if (!directionsUrl && !address) return null;
 
   const onShare = async () => {
     try {
       if (navigator.share) {
-        await navigator.share({ title: name, text, url: directionsUrl });
+        await navigator.share({ title: name, text: shareText, url: directionsUrl ?? undefined });
         return;
       }
     } catch {}
-    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+
+    window.open(`https://wa.me/?text=${encodeURIComponent(whatsappText)}`, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <button type="button" aria-label="Ubicación" onClick={onShare} className="flex flex-col items-center">
+    <button type="button" aria-label="Ubicacion" onClick={onShare} className="flex flex-col items-center">
       <MapPin color="#21111199" className="h-6 w-6" />
-      <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">Ubicación</span>
+      <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">Ubicacion</span>
     </button>
   );
 }

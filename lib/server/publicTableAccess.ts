@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { fetchDashboardApi } from "./dashboardApi";
 import type { PublicTenant } from "./publicMenu";
 
 export type PublicTableContext = {
@@ -20,13 +21,9 @@ type PublicTableApiResponse = {
   tenant: PublicTenant;
 };
 
-function getDashboardBase() {
-  return process.env.NEXT_PUBLIC_DASHBOARD_API_URL ?? "http://localhost:3001";
-}
-
 export async function loadPublicTableByToken(tableToken: string): Promise<PublicTableContext> {
   const normalizedToken = decodeURIComponent(tableToken).trim();
-  const response = await fetch(`${getDashboardBase()}/api/public/tables/${encodeURIComponent(normalizedToken)}`, {
+  const response = await fetchDashboardApi(`/api/public/tables/${encodeURIComponent(normalizedToken)}`, {
     cache: "no-store",
   });
 
@@ -35,7 +32,15 @@ export async function loadPublicTableByToken(tableToken: string): Promise<Public
   }
 
   if (!response.ok) {
-    throw new Error("Error cargando mesa publica");
+    let detail = "";
+    try {
+      const payload = (await response.json()) as { error?: string };
+      detail = payload.error ? `: ${payload.error}` : "";
+    } catch {
+      detail = "";
+    }
+
+    throw new Error(`Error cargando mesa publica (${response.status})${detail}`);
   }
 
   const data = (await response.json()) as PublicTableApiResponse;
@@ -52,7 +57,7 @@ export async function loadPublicTableByToken(tableToken: string): Promise<Public
 export async function trackPublicTableView(tableToken: string, route: "short" | "tenant_table") {
   const normalizedToken = decodeURIComponent(tableToken).trim();
 
-  const response = await fetch(`${getDashboardBase()}/api/public/tables/${encodeURIComponent(normalizedToken)}/events`, {
+  const response = await fetchDashboardApi(`/api/public/tables/${encodeURIComponent(normalizedToken)}/events`, {
     method: "POST",
     cache: "no-store",
     headers: {
