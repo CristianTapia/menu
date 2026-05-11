@@ -10,6 +10,29 @@ import AutoRefresh from "./AutoRefresh";
 import { Product, Category, Highlight, MenuContext } from "@/lib/types";
 import { ReceiptText, Plus, Minus } from "lucide-react";
 
+function loadStoredCart(cartStorageKey: string) {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const storedCart = window.localStorage.getItem(cartStorageKey);
+    if (!storedCart) return [];
+
+    const parsedCart = JSON.parse(storedCart) as { product: Product; quantity: number }[];
+    if (!Array.isArray(parsedCart)) return [];
+
+    return parsedCart.filter(
+      (item) =>
+        item &&
+        typeof item.quantity === "number" &&
+        item.quantity > 0 &&
+        item.product &&
+        typeof item.product.id === "number"
+    );
+  } catch {
+    return [];
+  }
+}
+
 export default function ClientMenu({
   products,
   categories,
@@ -23,14 +46,15 @@ export default function ClientMenu({
 }) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<{ product: Product; quantity: number }[]>([]);
-  const [hasLoadedCart, setHasLoadedCart] = useState(false);
   const cartStorageKey = useMemo(() => {
     const tenantScope = context?.tenantName?.trim() || "menu";
     const tableScope = context?.tableToken?.trim() || "general";
 
     return `menu-cart:${tenantScope}:${tableScope}`;
   }, [context?.tableToken, context?.tenantName]);
+  const [cartItems, setCartItems] = useState<{ product: Product; quantity: number }[]>(() =>
+    loadStoredCart(cartStorageKey)
+  );
 
   const subTotal = useMemo(
     () => cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
@@ -39,43 +63,8 @@ export default function ClientMenu({
   const hasLocation = Boolean(context?.location);
 
   useEffect(() => {
-    try {
-      const storedCart = window.localStorage.getItem(cartStorageKey);
-
-      if (!storedCart) {
-        setCartItems([]);
-        return;
-      }
-
-      const parsedCart = JSON.parse(storedCart) as { product: Product; quantity: number }[];
-
-      if (!Array.isArray(parsedCart)) {
-        setCartItems([]);
-        return;
-      }
-
-      setCartItems(
-        parsedCart.filter(
-          (item) =>
-            item &&
-            typeof item.quantity === "number" &&
-            item.quantity > 0 &&
-            item.product &&
-            typeof item.product.id === "number"
-        )
-      );
-    } catch {
-      setCartItems([]);
-    } finally {
-      setHasLoadedCart(true);
-    }
-  }, [cartStorageKey]);
-
-  useEffect(() => {
-    if (!hasLoadedCart) return;
-
     window.localStorage.setItem(cartStorageKey, JSON.stringify(cartItems));
-  }, [cartItems, cartStorageKey, hasLoadedCart]);
+  }, [cartItems, cartStorageKey]);
 
   const formatCLP = (value: number) =>
     new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 }).format(value);
