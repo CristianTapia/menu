@@ -39,7 +39,7 @@ export default function OffCanvas({
 
       {/* Menu Off-Canvas */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-[var(--color-background)] shadow-lg transform ${
+        className={`fixed top-0 left-0 h-full w-64 bg-[var(--color-surface)] text-[var(--color-foreground)] shadow-lg transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 flex flex-col`}
       >
@@ -55,17 +55,17 @@ export default function OffCanvas({
         <div className="flex-1 overflow-y-auto p-2">{children}</div>
 
         {/* Footer para ordenar */}
-        <footer className="flex flex-col gap-3 text-sm justify-between border-t border-gray-200 bg-background-light px-3 py-6 dark:border-gray-700 dark:bg-background-dark">
+        <footer className="flex flex-col gap-3 text-sm justify-between border-t border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-6">
           <div className="flex justify-between">
-            <p className="text-zinc-600 dark:text-zinc-400">Subtotal</p>
+            <p className="text-[var(--color-muted)]">Subtotal</p>
             <p>{formattedSubTotal}</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-zinc-600 dark:text-zinc-400">Propina sugerida (10%)</p>
+            <p className="text-[var(--color-muted)]">Propina sugerida (10%)</p>
             <p>{formattedTip}</p>
           </div>
           <div className="flex justify-between font-bold">
-            <p className="font-semibold text-background-dark dark:text-background-light">Total</p>
+            <p className="font-semibold text-[var(--color-foreground)]">Total</p>
             <p className="font-bold text-[var(--color-primary)]">{formattedGrandTotal}</p>
           </div>
         </footer>

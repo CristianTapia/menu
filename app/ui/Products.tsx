@@ -63,7 +63,7 @@ export default function Products({
                       className="h-32 w-full sm:h-56 object-cover rounded-xl"
                     />
                   ) : (
-                    <div className="h-32 w-full sm:h-56 border rounded-xl border-gray-300 grid place-items-center text-xs">
+                    <div className="h-32 w-full sm:h-56 border rounded-xl border-[var(--color-border-box)] grid place-items-center text-xs">
                       Sin foto
                     </div>
                   )}
@@ -85,10 +85,10 @@ export default function Products({
               width={96}
               height={96}
               unoptimized
-              className="w-24 h-24 object-cover rounded-xl border flex-none shrink-0"
+              className="w-24 h-24 object-cover rounded-xl border border-[var(--color-border-box)] flex-none shrink-0"
             />
           ) : (
-            <div className="w-24 h-24 flex-none shrink-0 border border-gray-300 rounded-xl flex items-center justify-center text-xs">
+            <div className="w-24 h-24 flex-none shrink-0 border border-[var(--color-border-box)] rounded-xl flex items-center justify-center text-xs">
               Sin foto
             </div>
           )}
@@ -112,16 +112,16 @@ export default function Products({
               aria-label="Agregar a la orden"
               onClick={() => onAddToCart(product)}
             >
-              <ShoppingBasket color="white" size={16} />
+              <ShoppingBasket className="text-white" size={16} />
             </button>
             <button
               onClick={() => {
                 openModal("viewProduct", product.id);
               }}
-              className="order-last"
+              className="order-last text-[var(--color-primary)]"
               aria-label="Mas informacion"
             >
-              <Info color="#EA2831" size={20} />
+              <Info size={20} />
             </button>
           </div>
         </div>
@@ -130,13 +130,13 @@ export default function Products({
       {/* Modal unico fuera del map */}
       <Modal
         isOpen={activeModal === "viewProduct"}
-        icon={<BookOpenText color="#EA2831" />}
+        icon={<BookOpenText className="text-[var(--color-primary)]" />}
         iconBgOptionalClassName="bg-[var(--color-bg-selected)]"
         onCloseAction={closeModal}
         title={selectedProduct?.name ?? "Producto"}
         body={
           selectedProduct ? (
-            <div className="flex flex-col gap-2 text-gray-800">
+            <div className="flex flex-col gap-2 text-[var(--color-foreground)]">
               <p className="text-sm">{selectedProduct.description ?? "Sin descripcion"}</p>
             </div>
           ) : null

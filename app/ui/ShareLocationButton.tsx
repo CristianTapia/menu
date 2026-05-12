@@ -37,7 +37,7 @@ export default function ShareLocationButton({
 
   return (
     <button type="button" aria-label="Ubicacion" onClick={onShare} className="flex flex-col items-center">
-      <MapPin color="#21111199" className="h-6 w-6" />
+      <MapPin className="h-6 w-6 text-[var(--color-category)]" />
       <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">Ubicacion</span>
     </button>
   );

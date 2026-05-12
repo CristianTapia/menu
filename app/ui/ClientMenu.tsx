@@ -114,7 +114,7 @@ export default function ClientMenu({
             onClick={() => setIsOffCanvasOpen(true)}
             className="flex flex-col items-center"
           >
-            <ReceiptText color="#21111199" className="h-6 w-6" aria-label="Producto agregado" />
+            <ReceiptText className="h-6 w-6 text-[var(--color-category)]" aria-label="Producto agregado" />
             <span className="pt-1 text-xs font-extrabold text-[var(--color-category)]">¿Qué pedí?</span>
           </button>
           {context?.location ? (
@@ -160,11 +160,11 @@ export default function ClientMenu({
                   </div>
                 </div>
                 {/* Botones de cantidad */}
-                <div className="flex font-bold items-center justify-center gap-3 rounded-full border border-gray-200 px-3 py-1 dark:border-gray-700">
+                <div className="flex font-bold items-center justify-center gap-3 rounded-full border border-[var(--color-border)] px-3 py-1">
                   <button onClick={() => handleRemoveFromCart(item.product)} className="text-[var(--color-primary)]">
                     <Minus size={14} />
                   </button>
-                  <span className="w-3 text-center font-medium text-background-dark dark:text-background-light">
+                  <span className="w-3 text-center font-medium text-[var(--color-foreground)]">
                     {item.quantity}
                   </span>
                   <button onClick={() => handleAddToCart(item.product)} className="text-[var(--color-primary)]">

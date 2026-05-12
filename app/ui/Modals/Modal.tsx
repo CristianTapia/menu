@@ -46,10 +46,13 @@ export default function Modal({
           onClick={onCloseAction}
         >
           {/* Evita que el click dentro del modal lo cierre */}
-          <div className="bg-white p-6 rounded-lg w-auto mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="bg-[var(--color-surface)] text-[var(--color-foreground)] p-6 rounded-lg w-auto mx-auto max-w-3xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal header */}
             <div className="flex justify-end mb-2">
-              <button className=" text-gray-900 cursor-pointer" onClick={onCloseAction}>
+              <button className="text-[var(--color-foreground)] cursor-pointer" onClick={onCloseAction}>
                 <X size={24} />
               </button>
             </div>
