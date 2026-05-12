@@ -90,7 +90,10 @@ export default function ClientMenu({
 
   return (
     <div className="flex flex-col bg-[var(--color-background)]">
-      <MenuRealtimeRefresh tenantId={context?.tenantId} />
+      <MenuRealtimeRefresh
+        fallbackIntervalMs={Number(process.env.NEXT_PUBLIC_MENU_AUTO_REFRESH_MS ?? 60000)}
+        tenantId={context?.tenantId}
+      />
       <header className="fixed inset-x-0 top-0 overflow-x-auto p-3 text-[var(--color-foreground)] bg-[rgb(var(--color-background-rgb)/0.92)] ">
         <div className="items-center text-center font-bold p-2">
           {context?.tenantName ? context.tenantName : "Menu"}
