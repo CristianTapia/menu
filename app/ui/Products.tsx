@@ -50,7 +50,7 @@ export default function Products({
               {highlights.map((highlight) => (
                 <article
                   key={highlight.id}
-                  className="snap-start snap-always shrink-0 basis-[90%] sm:basis-[70%] w-full"
+                  className="snap-start snap-always shrink-0 basis-[90%] sm:basis-[70%] w-full rounded-xl bg-[var(--color-surface)] p-3"
                 >
                   {highlight.image_url ? (
                     <Image
@@ -76,7 +76,7 @@ export default function Products({
       ) : null}
 
       {sortedProducts.map((product) => (
-        <div key={product.id} className="flex flex-row gap-2 items-start">
+        <div key={product.id} className="flex flex-row gap-2 items-start rounded-xl bg-[var(--color-surface)] p-4">
           {/* Foto */}
           {product.image_url ? (
             <Image
