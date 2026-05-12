@@ -12,7 +12,7 @@ export default async function TenantMenuPage({ params }: { params: Promise<{ ten
       products={data.products}
       categories={data.categories}
       highlights={data.highlights}
-      context={{ tenantName: data.tenant.name, location: data.location }}
+      context={{ tenantId: data.tenant.id, tenantName: data.tenant.name, location: data.location }}
     />
   );
 }

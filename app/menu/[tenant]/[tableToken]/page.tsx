@@ -37,6 +37,7 @@ export default async function TenantTableMenuPage({
       categories={data.categories}
       highlights={data.highlights}
       context={{
+        tenantId: table.tenant.id,
         tenantName: table.tenant.name,
         location: data.location,
         tableLabel: table.label,

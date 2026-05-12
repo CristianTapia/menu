@@ -31,6 +31,7 @@ export type TenantLocation = {
 };
 
 export type MenuContext = {
+  tenantId?: string | null;
   tenantName?: string | null;
   location?: TenantLocation | null;
   tableLabel?: string | null;

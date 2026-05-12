@@ -6,7 +6,7 @@ import Categories from "./Categories";
 import Products from "./Products";
 import ShareLocationButton from "./ShareLocationButton";
 import OffCanvas from "./OffCanvas";
-import AutoRefresh from "./AutoRefresh";
+import MenuRealtimeRefresh from "./MenuRealtimeRefresh";
 import { Product, Category, Highlight, MenuContext } from "@/lib/types";
 import { ReceiptText, Plus, Minus } from "lucide-react";
 
@@ -90,7 +90,7 @@ export default function ClientMenu({
 
   return (
     <div className="flex flex-col bg-[var(--color-background)]">
-      <AutoRefresh intervalMs={Number(process.env.NEXT_PUBLIC_MENU_AUTO_REFRESH_MS ?? 15000)} />
+      <MenuRealtimeRefresh tenantId={context?.tenantId} />
       <header className="fixed inset-x-0 top-0 overflow-x-auto p-3 text-[var(--color-foreground)] bg-[rgb(var(--color-background-rgb)/0.92)] ">
         <div className="items-center text-center font-bold p-2">
           {context?.tenantName ? context.tenantName : "Menu"}
