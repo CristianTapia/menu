@@ -1,18 +1,32 @@
+import { notFound } from "next/navigation";
+
 import ClientMenu from "@/app/ui/ClientMenu";
 import { loadPublicMenuByTenant } from "@/lib/server/publicMenu";
 import { loadPublicTableByToken, trackPublicTableView } from "@/lib/server/publicTableAccess";
 
 export const dynamic = "force-dynamic";
 
-export default async function PublicTableMenuPage({ params }: { params: Promise<{ tableToken: string }> }) {
-  const { tableToken } = await params;
+export default async function RootTenantTableMenuPage({
+  params,
+}: {
+  params: Promise<{ tenant: string; tableToken: string }>;
+}) {
+  const { tenant, tableToken } = await params;
+  const requestedTenant = decodeURIComponent(tenant);
   const table = await loadPublicTableByToken(tableToken);
 
-  const tenantKey = table.tenant.domain ?? table.tenant.id;
-  const data = await loadPublicMenuByTenant(tenantKey);
+  const matchesTenant =
+    requestedTenant === table.tenant.id ||
+    (table.tenant.domain !== null && requestedTenant.toLowerCase() === table.tenant.domain.toLowerCase());
+
+  if (!matchesTenant) {
+    notFound();
+  }
+
+  const data = await loadPublicMenuByTenant(requestedTenant);
 
   try {
-    await trackPublicTableView(table.token, "short");
+    await trackPublicTableView(table.token, "tenant_table");
   } catch (error) {
     console.error(error);
   }

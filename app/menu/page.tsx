@@ -6,16 +6,10 @@ export default function MenuLandingPage() {
       <div className="max-w-lg w-full rounded-xl border border-slate-200 bg-white p-6 text-slate-900">
         <h1 className="text-xl font-semibold mb-2">Menu publico</h1>
         <p className="text-sm mb-4">
-          Debes abrir esta ruta con tenant, por ejemplo: <code>/menu/local-2</code>.
+          Debes abrir esta ruta con local y mesa, por ejemplo: <code>/local-2/t-mesa-demo</code>.
         </p>
         <p className="text-sm mb-4">
-          Si vienes desde QR, revisa que el codigo apunte a <code>/menu/&lt;tenant-domain&gt;</code>.
-        </p>
-        <p className="text-sm mb-4">
-          Para acceso por mesa, puedes usar una URL corta como <code>/m/&lt;table-token&gt;</code>.
-        </p>
-        <p className="text-sm mb-4">
-          Si prefieres incluir tenant y mesa en el QR: <code>/menu/&lt;tenant-domain&gt;/&lt;table-token&gt;</code>.
+          Si vienes desde QR, revisa que el codigo apunte a <code>/&lt;tenant-domain&gt;/&lt;table-token&gt;</code>.
         </p>
         <Link href="/" className="inline-block text-sm font-medium text-blue-700 underline underline-offset-2">
           Volver al inicio
